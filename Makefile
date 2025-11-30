@@ -6,7 +6,7 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2025/11/30 22:29:15 by ohaker           ###   ########.fr        #
+#    Updated: 2025/11/30 22:47:05 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,26 +30,30 @@ ORANGE		= \033[33;01m
 
 all:	$(NAME)
 
-$(NAME): $(OBJ)
-	@echo "$(ORANGE)		- Compiling $(NAME)...$(NONE)"
-	@make -C $(LIBFT_DIR) --silent
-	@make -C $(MLX_DIR) --silent
-	@cc $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) $(OBJ) $(LIBFT) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -o $(NAME)
-	@echo "$(GREEN)		- $(NAME) Compiled -$(NONE)"
+$(LIBFT):
+	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
+
+$(NAME): $(OBJ) $(LIBFT)
+	echo "$(ORANGE)		- Compiling $(NAME)...$(NONE)"
+	make -C $(LIBFT_DIR) --silent
+	make -C $(MLX_DIR) --silent
+	cc $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) $(OBJ) $(LIBFT) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -o $(NAME)
+	echo "$(GREEN)		- $(NAME) Compiled -$(NONE)"
 
 %.o: %.c
-	@cc $(CFLAGS) -c $< -o $@
+	cc $(CFLAGS) -c $< -o $@
 
 clean:
-	@make clean -C $(MLX_DIR)
-	@make clean -C $(LIBFT_DIR)
-	@rm -rf $(OBJ)
-	@echo "$(ORANGE)		- Deleted object files$(NONE)"
+	rm -rf $(OBJ)
+	@$(MAKE) clean --no-print-directory -C $(MLX_DIR)
+	@$(MAKE) clean --no-print-directory -C $(LIBFT_DIR)
+	echo "$(ORANGE)		- Deleted object files$(NONE)"
 
 fclean: clean
-	@make fclean -C $(LIBFT_DIR)
-	@rm -f $(NAME)
-	@echo "$(ORANGE)		- Deleted $(NAME)$(NONE)"
+	rm -f $(NAME)
+	@$(MAKE) clean --no-print-directory -C $(MLX_DIR)
+	@$(MAKE) fclean --no-print-directory -C $(LIBFT_DIR)
+	echo "$(ORANGE)		- Deleted $(NAME)$(NONE)"
 
 re: fclean all
 

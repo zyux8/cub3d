@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/11/30 22:22:39 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/11/30 22:42:38 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int	main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
-	printf("penis\n");
+	ft_putstr("penis\n");
 	return (0);
 }

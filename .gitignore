@@ -2,5 +2,4 @@
 */*.o
 .vscode/*
 valgrind.log
-minishell
-minishell_old
+cub3d
