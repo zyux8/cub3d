@@ -1,0 +1,6 @@
+*.o
+*/*.o
+.vscode/*
+valgrind.log
+minishell
+minishell_old
