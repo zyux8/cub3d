@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/11/30 22:22:53 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/01 16:42:24 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUBE3D_H
 
 # include "libft/libft.h"
+# include "minilibx-linux/mlx.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
