@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/01 21:45:13 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/02 22:16:24 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,64 @@
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	char	*addr;
-	void	*img;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
+	void			*mlx;
+	void			*win;
+	char			*addr;
+	void			*img;
+	int				bits_per_pixel;
+	int				line_len;
+	int				endian;
+	struct t_map	*map;
+}					t_data;
+
+enum				e_map_info
+{
+	GROUND = 0,
+	WALL,
+	NONE,
+	PLAYER_N,
+	PLAYER_E,
+	PLAYER_s,
+	PLAYER_W,
+};
+
+typedef struct s_texture
+{
+	void			*img_ptr;
+	char			*addr;
+	int				width;
+	int				height;
+	int				bits_per_pixel;
+	int				line_len;
+	int				endian;
+}					t_texture;
+
+typedef struct s_map
+{
+	t_texture		tex_north;
+	t_texture		tex_south;
+	t_texture		tex_west;
+	t_texture		tex_east;
+	int				**map;
+	enum e_map_info	player_facing;
+
+}					t_map;
+
+// srcs/extract_map/check_map_utils.c
+int					count_lines(const char filename);
+char				**malloc_lines(const char *filename);
+
+// srcs/extract_map/check_map.c
+int					check_map(char *file, t_data *data);
 
 // srcs/input_handler.c
-int			handle_key(int keycode, t_data *data);
-int			handle_destroy(t_data *data);
+int					handle_key(int keycode, t_data *data);
+int					handle_destroy(t_data *data);
 
 // srcs/main.c
-void		cleanup_and_exit(t_data *data);
+void				cleanup_and_exit(t_data *data);
 
 // srcs/utils.c
-void		my_pixel_put(t_data *data, int x, int y, int color);
+void				my_pixel_put(t_data *data, int x, int y, int color);
 
 #endif
