@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/02 22:16:24 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/10 21:52:21 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,66 +39,88 @@
 # define KEY_RIGHT 65363
 # define KEY_LEFT 65361
 
+typedef struct s_map	t_map;
+
 typedef struct s_data
 {
-	void			*mlx;
-	void			*win;
-	char			*addr;
-	void			*img;
-	int				bits_per_pixel;
-	int				line_len;
-	int				endian;
-	struct t_map	*map;
-}					t_data;
+	void				*mlx;
+	void				*win;
+	char				*addr;
+	void				*img;
+	int					bits_per_pixel;
+	int					line_len;
+	int					endian;
+	t_map				*map;
+}						t_data;
 
-enum				e_map_info
+enum					e_map_info
 {
 	GROUND = 0,
 	WALL,
 	NONE,
 	PLAYER_N,
 	PLAYER_E,
-	PLAYER_s,
+	PLAYER_S,
 	PLAYER_W,
 };
 
 typedef struct s_texture
 {
-	void			*img_ptr;
-	char			*addr;
-	int				width;
-	int				height;
-	int				bits_per_pixel;
-	int				line_len;
-	int				endian;
-}					t_texture;
+	void				*img_ptr;
+	char				*addr;
+	int					width;
+	int					height;
+	int					bits_per_pixel;
+	int					line_len;
+	int					endian;
+}						t_texture;
 
 typedef struct s_map
 {
-	t_texture		tex_north;
-	t_texture		tex_south;
-	t_texture		tex_west;
-	t_texture		tex_east;
-	int				**map;
-	enum e_map_info	player_facing;
+	t_texture			*tex_north;
+	t_texture			*tex_south;
+	t_texture			*tex_west;
+	t_texture			*tex_east;
+	t_texture			*tex_floor;
+	t_texture			*tex_ceiling;
+	int					ceiling_color;
+	int					floor_color;
+	int					**map;
+	// int				player_pos[2];
+	enum e_map_info		player_facing;
+}						t_map;
 
-}					t_map;
+// srcs/extract_map/check_map_even_more.c
+char					*get_single_text_path(char **lines, char *sig);
+void					malloc_map(int ***map, int height, int width);
+int						get_color(char **lines, char *sig);
+
+// srcs/extract_map/check_map_utils_more.c
+void					init_map(t_data *data);
+int						start_of_map(char **lines);
+void					copy_col(char *line, int *row, int width);
+int						get_height(char **lines, int start);
+int						get_width(char **lines, int start);
 
 // srcs/extract_map/check_map_utils.c
-int					count_lines(const char filename);
-char				**malloc_lines(const char *filename);
+int						count_lines(const char *filename);
+char					**malloc_lines(const char *filename);
+int						create_rgb(int r, int g, int b);
+void					free_paths(char *p_no, char *p_so, char *p_we,
+							char *p_ea);
+int						is_map_char(char c);
 
 // srcs/extract_map/check_map.c
-int					check_map(char *file, t_data *data);
+int						check_map(char *file, t_data *data);
 
 // srcs/input_handler.c
-int					handle_key(int keycode, t_data *data);
-int					handle_destroy(t_data *data);
+int						handle_key(int keycode, t_data *data);
+int						handle_destroy(t_data *data);
 
 // srcs/main.c
-void				cleanup_and_exit(t_data *data);
+void					cleanup_and_exit(t_data *data);
 
 // srcs/utils.c
-void				my_pixel_put(t_data *data, int x, int y, int color);
+void					my_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

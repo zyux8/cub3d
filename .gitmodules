@@ -1,3 +1,5 @@
 [submodule "includes/libft"]
 	path = includes/libft
 	url = https://github.com/zyux8/libft.git
+
+# git submodule update --init --recursive

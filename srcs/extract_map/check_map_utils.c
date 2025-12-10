@@ -6,13 +6,13 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:03:30 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/02 22:04:14 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/10 21:39:59 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	count_lines(const char filename)
+int	count_lines(const char *filename)
 {
 	int		fd;
 	int		x;
@@ -22,7 +22,7 @@ int	count_lines(const char filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (-1);
-	while (line = get_next_line(fd) != NULL)
+	while ((line = get_next_line(fd)) != NULL)
 	{
 		x++;
 		free(line);
@@ -46,8 +46,27 @@ char	**malloc_lines(const char *filename)
 		return (NULL);
 	x = 0;
 	fd = open(filename, O_RDONLY);
-	while (lines[x] = get_next_line(fd) != NULL)
+	while ((lines[x] = get_next_line(fd)) != NULL)
 		x++;
 	close(fd);
 	return (lines);
+}
+
+int	create_rgb(int r, int g, int b)
+{
+	return ((r << 16) | (g << 8) | b);
+}
+
+void free_paths(char *p_no, char *p_so, char *p_we, char *p_ea)
+{
+	free(p_no);
+	free(p_so);
+	free(p_we);
+	free(p_ea);
+}
+
+int	is_map_char(char c)
+{
+	return (c == ' ' || c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E'
+		|| c == 'W');
 }
