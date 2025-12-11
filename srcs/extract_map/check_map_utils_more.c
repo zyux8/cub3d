@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:40:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/10 21:45:36 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/11 18:47:43 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	copy_col(char *line, int *row, int width)
 			row[x] = PLAYER_W;
 		x++;
 	}
+	x--;
 	while (x < width)
 		row[x++] = NONE;
 	row[x] = '\0';
@@ -86,7 +87,6 @@ int	get_height(char **lines, int start)
 	x = start;
 	while (lines[x])
 		x++;
-	printf("end of map: '%d'\n", x - start);
 	return (x - start);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/11 17:19:04 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/11 18:39:49 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int	extract_map(t_data *data, char **lines)
 	int	y;
 
 	start = start_of_map(lines);
-	printf("line start map: '%d\n", start);
 	height = get_height(lines, start);
 	width = get_width(lines, start);
 	printf("height: '%d'\nwidth: '%d'\n", height, width);
@@ -118,15 +117,9 @@ int	extract_map(t_data *data, char **lines)
 	}
 	print_map(map, height, width);
 	data->map->map = map;
+	data->map->map_height = height;
+	data->map->map_width = width;
 	return (1);
-}
-
-int	map_valid(t_data *data)
-{
-	int	x;
-
-	x = 0;
-	
 }
 
 int	check_map(char *filename, t_data *data)
