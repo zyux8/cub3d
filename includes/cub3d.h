@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/10 21:52:21 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/11 17:15:51 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ int						is_map_char(char c);
 
 // srcs/extract_map/check_map.c
 int						check_map(char *file, t_data *data);
+
+// srcs/extract_map/more_more_more_utils.c
+t_texture				*get_texture(t_data *data, char *path);
 
 // srcs/input_handler.c
 int						handle_key(int keycode, t_data *data);

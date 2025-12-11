@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/10 21:54:24 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/11 17:19:04 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,14 @@ int	extract_map(t_data *data, char **lines)
 	return (1);
 }
 
+int	map_valid(t_data *data)
+{
+	int	x;
+
+	x = 0;
+	
+}
+
 int	check_map(char *filename, t_data *data)
 {
 	char	**lines;
@@ -131,6 +139,7 @@ int	check_map(char *filename, t_data *data)
 	extract_textures(data, lines);
 	extract_colors(data, lines);
 	extract_map(data, lines);
+	map_valid(data);
 	return (1);
 	// open file, get lines \/
 	// extract textures, if not exist return 0 \/
