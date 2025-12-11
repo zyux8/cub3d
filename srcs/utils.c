@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:34:48 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/10 18:59:22 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/11 19:54:30 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,9 @@ void	my_pixel_put(t_data *data, int x, int y, int color)
 		return ;
 	dst = data->addr + (y * data->line_len + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+int	create_rgb(int r, int g, int b)
+{
+	return ((r << 16) | (g << 8) | b);
 }

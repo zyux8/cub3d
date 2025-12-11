@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/11 18:16:53 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/11 22:22:08 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ typedef struct s_map
 	int					**map;
 	int					map_height;
 	int					map_width;
-	// int				player_pos[2];
 	enum e_map_info		player_facing;
 }						t_map;
 
@@ -111,9 +110,13 @@ int						create_rgb(int r, int g, int b);
 void					free_paths(char *p_no, char *p_so, char *p_we,
 							char *p_ea);
 int						is_map_char(char c);
+t_texture				*get_texture(t_data *data, char *path);
 
 // srcs/extract_map/check_map.c
-int						check_map(char *file, t_data *data);
+int						check_rows(t_map *map);
+int						check_cols(t_map *map);
+int						check_player(t_map *map);
+int						check_nones(t_map *map);
 
 // srcs/extract_map/validate_map.c
 int						map_valid(t_data *data);

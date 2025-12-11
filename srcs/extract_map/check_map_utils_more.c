@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:40:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/11 18:47:43 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/11 22:27:42 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	copy_col(char *line, int *row, int width)
 	int	x;
 
 	x = 0;
-	while (line[x])
+	while (line[x] && line[x] != '\n')
 	{
 		if (line[x] == ' ')
 			row[x] = NONE;
@@ -74,7 +74,6 @@ void	copy_col(char *line, int *row, int width)
 			row[x] = PLAYER_W;
 		x++;
 	}
-	x--;
 	while (x < width)
 		row[x++] = NONE;
 	row[x] = '\0';
@@ -93,15 +92,15 @@ int	get_height(char **lines, int start)
 int	get_width(char **lines, int start)
 {
 	int	x;
-	int	len;
+	int	width;
 
 	x = start;
-	len = 0;
+	width = 0;
 	while (lines[x])
 	{
-		if (ft_strlen(lines[x]) > len)
-			len = ft_strlen(lines[x]);
+		if (ft_strlen(lines[x]) > width)
+			width = ft_strlen(lines[x]);
 		x++;
 	}
-	return (len - 1);
+	return (width - 1);
 }

@@ -6,33 +6,11 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/11 18:39:49 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/11 22:22:21 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_texture	*get_texture(t_data *data, char *path)
-{
-	t_texture	*texture;
-
-	if (!data || !path)
-		return (NULL);
-	texture = malloc(sizeof(t_texture));
-	if (!texture)
-		return (NULL);
-	texture->img_ptr = mlx_xpm_file_to_image(data->mlx, path, &texture->width,
-			&texture->height);
-	if (!texture->img_ptr)
-	{
-		free(texture);
-		printf("get_texture: failed to load image '%s'\n", path);
-		return (NULL);
-	}
-	texture->addr = mlx_get_data_addr(texture->img_ptr,
-			&texture->bits_per_pixel, &texture->line_len, &texture->endian);
-	return (texture);
-}
 
 int	extract_textures(t_data *data, char **lines)
 {
@@ -99,26 +77,31 @@ void	print_map(int **map, int height, int width)
 int	extract_map(t_data *data, char **lines)
 {
 	int	start;
-	int	height;
-	int	width;
 	int	**map;
 	int	y;
 
 	start = start_of_map(lines);
-	height = get_height(lines, start);
-	width = get_width(lines, start);
-	printf("height: '%d'\nwidth: '%d'\n", height, width);
+	data->map->map_height = get_height(lines, start);
+	data->map->map_width = get_width(lines, start);
+	printf("height: '%d'\nwidth: '%d'\n", data->map->map_height, data->map->map_width);
 	y = 0;
-	malloc_map(&map, height, width);
-	while (y < height)
+	malloc_map(&map, data->map->map_height, data->map->map_width);
+	while (y < data->map->map_height)
 	{
-		copy_col(lines[start + y], map[y], width);
+		copy_col(lines[start + y], map[y], data->map->map_width);
 		y++;
 	}
-	print_map(map, height, width);
+	print_map(map, data->map->map_height, data->map->map_width);
 	data->map->map = map;
-	data->map->map_height = height;
-	data->map->map_width = width;
+	return (1);
+}
+
+int	map_valid(t_data *data)
+{
+	check_rows(data->map);
+	check_cols(data->map);
+	check_player(data->map);
+	check_nones(data->map);
 	return (1);
 }
 
