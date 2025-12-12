@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/11 20:02:42 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/12 19:43:44 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char **av)
 	(void)ac;
 	(void)av;
 	init_data(&data);
-	if (!check_map(av[1], &data))
+	if (check_map(av[1], &data))
 		return (0);
 	for (int x = 100; x < 300; x++)
 		my_pixel_put(&data, x, 400, data.map->ceiling_color);

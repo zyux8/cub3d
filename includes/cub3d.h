@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/11 22:22:08 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/12 19:47:31 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,10 @@ int						check_rows(t_map *map);
 int						check_cols(t_map *map);
 int						check_player(t_map *map);
 int						check_nones(t_map *map);
+int						check_map(char *filename, t_data *data);
 
 // srcs/extract_map/validate_map.c
-int						map_valid(t_data *data);
+int						map_valid(t_map *map);
 
 // srcs/input_handler.c
 int						handle_key(int keycode, t_data *data);

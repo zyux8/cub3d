@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/11 22:22:21 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/12 19:52:00 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	extract_map(t_data *data, char **lines)
 	start = start_of_map(lines);
 	data->map->map_height = get_height(lines, start);
 	data->map->map_width = get_width(lines, start);
-	printf("height: '%d'\nwidth: '%d'\n", data->map->map_height, data->map->map_width);
+	printf("height: '%d'\nwidth: '%d'\n", data->map->map_height,
+		data->map->map_width);
 	y = 0;
 	malloc_map(&map, data->map->map_height, data->map->map_width);
 	while (y < data->map->map_height)
@@ -96,12 +97,16 @@ int	extract_map(t_data *data, char **lines)
 	return (1);
 }
 
-int	map_valid(t_data *data)
+int	map_valid(t_map *map)
 {
-	check_rows(data->map);
-	check_cols(data->map);
-	check_player(data->map);
-	check_nones(data->map);
+	if (!check_rows(map))
+		return (0);
+	if (!check_cols(map))
+		return (0);
+	if (!check_player(map))
+		return (0);
+	if (!check_nones(map))
+		return (0);
 	return (1);
 }
 
@@ -112,17 +117,13 @@ int	check_map(char *filename, t_data *data)
 	lines = malloc_lines((const char *)filename);
 	if (!lines)
 		return (0);
-	extract_textures(data, lines);
-	extract_colors(data, lines);
+	if (!extract_textures(data, lines) || !extract_colors(data, lines))
+		return (0);
 	extract_map(data, lines);
-	map_valid(data);
+	if (map_valid(data->map))
+		return (0);
 	return (1);
-	// open file, get lines \/
-	// extract textures, if not exist return 0 \/
-	// extract colors, if not exist return 0 \/
-	// validate and save map, if not exist or invalid return 0
 }
-// tex_ptex_ptr = mlx_xpm_file_to_image(data.mlx, parsed_path_NO, &width,
-// 		&height);
 
 // has to be changed into new file for bonus and file parsing changed
+// or if F and C doesnt exist look for the other from bonus(better)

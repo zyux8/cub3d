@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:12:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/11 22:36:15 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/12 19:34:00 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,39 +94,50 @@ int	check_player(t_map *map)
 	return (1);
 }
 
-int	valid_none(int **map, int x, int y)
+int	valid_none(t_map *map, int x, int y)
 {
-	if (map[x][y - 1] && (map[x][y - 1] != WALL || map[x][y- 1] != NONE))
-		return (1);
-	else if (map[x][y + 1] && (map[x][y + 1] != WALL || map[x][y + 1] != NONE))
-		return (1);
-	else if (map[x - 1][y] && (map[x - 1][y] != WALL || map[x - 1][y] != NONE))
-		return (1);
-	else if (map[x + 1][y] && (map[x + 1][y] != WALL || map[x + 1][y] != NONE))
-		return (1);
-	return (0);
+	int	**tmap;
+
+	if (!map || !map->map)
+		return (0);
+	tmap = map->map;
+	if (x < 0 || x > map->map_height || y < 0 || y > map->map_width)
+		return (printf("here\n"), 0);
+	if (y - 1 >= 0 && (tmap[x][y - 1] == GROUND || (tmap[x][y - 1] >= PLAYER_N
+			&& tmap[x][y - 1] <= PLAYER_W)))
+		return (0);
+	if (y + 1 < map->map_width && (tmap[x][y + 1] == GROUND || (tmap[x][y + 1] >= PLAYER_N
+			&& tmap[x][y + 1] <= PLAYER_W)))
+		return (0);
+	if (x - 1 >= 0 && (tmap[x - 1][y] == GROUND || (tmap[x - 1][y] >= PLAYER_N
+				&& tmap[x - 1][y] <= PLAYER_W)))
+		return (0);
+	if (x + 1 < map->map_height && (tmap[x + 1][y] == GROUND || (tmap[x + 1][y] >= PLAYER_N
+				&& tmap[x + 1][y] <= PLAYER_W)))
+		return (0);
+	return (1);
 }
 
 int	check_nones(t_map *map)
 {
 	int	x;
 	int	y;
-	int	**map_temp;
 
+	if (!map || !map->map)
+		return (0);
 	x = 0;
-	y = 0;
-	map_temp = map->map;
 	while (x < map->map_height)
 	{
 		y = 0;
 		while (y < map->map_width)
 		{
-			if (map_temp[x][y] == NONE)
-				if (!valid_none(map_temp, x, y))
+			if (map->map[x][y] == NONE)
+				if (!valid_none(map, x, y))
 					return (printf("invalid space at [%d][%d]\n", x, y), 0);
 			y++;
 		}
 		x++;
 	}
+	printf("NONEs valid\n");
 	return (1);
 }
