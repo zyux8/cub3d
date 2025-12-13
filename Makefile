@@ -6,7 +6,7 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2025/12/12 19:30:59 by ohaker           ###   ########.fr        #
+#    Updated: 2025/12/13 17:32:52 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC = $(addprefix srcs/, \
 	check_map_utils_more.c \
 	check_map_utils.c \
 	check_map.c \
+	extract_colors.c \
 	validate_map.c \
 	) \
 	input_handler.c \

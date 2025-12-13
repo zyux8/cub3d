@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/12 19:47:31 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/13 17:32:18 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef struct s_map
 	t_texture			*tex_east;
 	t_texture			*tex_floor;
 	t_texture			*tex_ceiling;
+	t_texture			*tex_door;
+	t_texture			*tex_sprite;
 	int					ceiling_color;
 	int					floor_color;
 	int					**map;
@@ -118,6 +120,9 @@ int						check_cols(t_map *map);
 int						check_player(t_map *map);
 int						check_nones(t_map *map);
 int						check_map(char *filename, t_data *data);
+
+// srcs/extract_map/extract_colors.c
+int						extract_colors_man(t_data *data, char **lines);
 
 // srcs/extract_map/validate_map.c
 int						map_valid(t_map *map);

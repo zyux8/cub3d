@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:03:30 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/11 20:14:03 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/13 17:55:31 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,14 @@ char	**malloc_lines(const char *filename)
 
 void	free_paths(char *p_no, char *p_so, char *p_we, char *p_ea)
 {
-	free(p_no);
-	free(p_so);
-	free(p_we);
-	free(p_ea);
+	if (p_no)
+		free(p_no);
+	if (p_so)
+		free(p_so);
+	if (p_we)
+		free(p_we);
+	if (p_ea)
+		free(p_ea);
 }
 
 int	is_map_char(char c)
