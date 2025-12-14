@@ -1,8 +1,9 @@
 NO maps/textures/wall_1.xpm
-F maps/textures/wall_1.xpm
 EA maps/textures/wall_1.xpm
+
 WE maps/textures/wall_1.xpm
 C 220,61,0
+F 0,30,220
 SO maps/textures/wall_1.xpm
 
 

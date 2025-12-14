@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:03:30 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/13 17:55:31 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/14 01:23:58 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ char	**malloc_lines(const char *filename)
 	int		x;
 	int		fd;
 
+	printf("'%s'\n", filename);
+	if (!filename)
+		return (printf("invalid file\n"), NULL);
 	if (!ft_strnstr(filename, ".cub", ft_strlen(filename)))
 		return (printf("invalid file\n"), NULL);
 	line_cnt = count_lines(filename);
@@ -51,6 +54,7 @@ char	**malloc_lines(const char *filename)
 	while ((lines[x] = get_next_line(fd)) != NULL)
 		x++;
 	close(fd);
+	lines[x] = NULL;
 	return (lines);
 }
 
@@ -68,8 +72,10 @@ void	free_paths(char *p_no, char *p_so, char *p_we, char *p_ea)
 
 int	is_map_char(char c)
 {
+	// if (!c)
+	// 	return (0);
 	return (c == ' ' || c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E'
-		|| c == 'W');
+		|| c == 'W' || c == 'D' || c == 'P');
 }
 
 t_texture	*get_texture(t_data *data, char *path)

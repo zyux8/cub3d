@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/13 17:32:18 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/14 01:32:36 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ enum					e_map_info
 	PLAYER_E,
 	PLAYER_S,
 	PLAYER_W,
+	DOOR,
+	SPRITE,
 };
 
 typedef struct s_texture
@@ -121,8 +123,8 @@ int						check_player(t_map *map);
 int						check_nones(t_map *map);
 int						check_map(char *filename, t_data *data);
 
-// srcs/extract_map/extract_colors.c
-int						extract_colors_man(t_data *data, char **lines);
+// srcs/extract_map/extract_texts.c
+int						extract_colors(t_data *data, char **lines);
 
 // srcs/extract_map/validate_map.c
 int						map_valid(t_map *map);

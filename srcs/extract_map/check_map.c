@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/13 17:32:36 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/14 01:41:38 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int	extract_textures(t_data *data, char **lines)
 			printf("extract_textures: missing texture path(s)\n"), 0);
 	if (!data->mlx)
 		return (free_paths(p_no, p_so, p_we, p_ea),
-			printf("extract_textures: data->mlx is NULL\n"),
-			0);
+			printf("extract_textures: data->mlx is NULL\n"), 0);
 	data->map->tex_north = get_texture(data, p_no);
 	data->map->tex_south = get_texture(data, p_so);
 	data->map->tex_west = get_texture(data, p_we);
@@ -47,6 +46,7 @@ void	print_map(int **map, int height, int width)
 	int	x;
 
 	y = 0;
+	printf("\n");
 	while (y < height)
 	{
 		x = 0;
@@ -58,6 +58,7 @@ void	print_map(int **map, int height, int width)
 		printf("\n");
 		y++;
 	}
+	printf("\n");
 }
 
 int	extract_map(t_data *data, char **lines)
@@ -103,7 +104,7 @@ int	check_map(char *filename, t_data *data)
 	lines = malloc_lines((const char *)filename);
 	if (!lines)
 		return (0);
-	if (!extract_textures(data, lines) || !extract_colors_man(data, lines))
+	if (!extract_textures(data, lines) || !extract_colors(data, lines))
 		return (0);
 	extract_map(data, lines);
 	if (map_valid(data->map))
