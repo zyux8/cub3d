@@ -6,16 +6,25 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2025/12/01 21:44:36 by ohaker           ###   ########.fr        #
+#    Updated: 2025/12/14 21:32:50 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
-CFLAGS = -Wall -Wextra -Werror -O3 -Iincludes -I/usr/include -Iminilibx-linux -g
+CFLAGS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Iminilibx-linux -g
 SRC = $(addprefix srcs/, \
+	$(addprefix handle_input/, \
+	check_map_even_more.c \
+	check_map_utils_more.c \
+	check_map_utils.c \
+	check_map.c \
+	extract_texts.c \
+	more_more_more_utils.c \
+	validate_map.c \
+	) \
+	input_handler.c \
 	main.c \
-	utils.c \
-	input_handler.c)
+	utils.c)
 
 OBJ = $(SRC:.c=.o)
 LIBFT_DIR = includes/libft
