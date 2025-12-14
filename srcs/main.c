@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 01:49:49 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/14 23:47:46 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	if (ac < 2)
+	if (ac < 2 || !ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
 	{
 		printf("Usage: './cub3d' <map.cub>\n");
 		return (1);
 	}
 	init_data(&data);
 	if (check_map(av[1], &data))
-		return (0);
+		return (cleanup_and_exit(&data), 0);
 	for (int x = 100; x < 300; x++)
 		my_pixel_put(&data, x, 400, data.map->floor_color);
 	for (int y = 100; y < 300; y++)

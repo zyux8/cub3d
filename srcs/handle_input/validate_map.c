@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:12:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 01:52:16 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/14 23:43:45 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	check_rows(t_map *map)
 
 	x = 0;
 	map_temp = map->map;
+	if (!map_temp)
+		return (0);
 	while (map_temp[x] && x < map->map_height)
 	{
 		y = 0;
@@ -104,16 +106,16 @@ int	valid_none(t_map *map, int x, int y)
 	if (x < 0 || x > map->map_height || y < 0 || y > map->map_width)
 		return (printf("here\n"), 0);
 	if (y - 1 >= 0 && (tmap[x][y - 1] == GROUND || (tmap[x][y - 1] >= PLAYER_N
-				&& tmap[x][y - 1] <= PLAYER_W)))
+		&& tmap[x][y - 1] <= PLAYER_W)))
 		return (0);
-	if (y + 1 < map->map_width && (tmap[x][y + 1] == GROUND || (tmap[x][y
-				+ 1] >= PLAYER_N && tmap[x][y + 1] <= PLAYER_W)))
+	if (y + 1 < map->map_width && (tmap[x][y + 1] == GROUND
+		|| (tmap[x][y + 1] >= PLAYER_N && tmap[x][y + 1] <= PLAYER_W)))
 		return (0);
 	if (x - 1 >= 0 && (tmap[x - 1][y] == GROUND || (tmap[x - 1][y] >= PLAYER_N
-				&& tmap[x - 1][y] <= PLAYER_W)))
+		&& tmap[x - 1][y] <= PLAYER_W)))
 		return (0);
-	if (x + 1 < map->map_height && (tmap[x + 1][y] == GROUND || (tmap[x
-				+ 1][y] >= PLAYER_N && tmap[x + 1][y] <= PLAYER_W)))
+	if (x + 1 < map->map_height && (tmap[x + 1][y] == GROUND
+		|| (tmap[x + 1][y] >= PLAYER_N && tmap[x + 1][y] <= PLAYER_W)))
 		return (0);
 	return (1);
 }

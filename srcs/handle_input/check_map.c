@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 01:41:38 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/14 23:42:13 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ int	extract_textures(t_data *data, char **lines)
 	return (1);
 }
 
-void	print_map(int **map, int height, int width)
+void	print_map(t_data *data)
 {
 	int	y;
 	int	x;
 
 	y = 0;
 	printf("\n");
-	while (y < height)
+	while (y < data->map->map_height - 1)
 	{
 		x = 0;
-		while (x < width)
+		while (x < data->map->map_width - 1)
 		{
-			printf("%d ", map[y][x]);
+			printf("%d ", data->map->map[y][x]);
 			x++;
 		}
 		printf("\n");
@@ -70,8 +70,6 @@ int	extract_map(t_data *data, char **lines)
 	start = start_of_map(lines);
 	data->map->map_height = get_height(lines, start);
 	data->map->map_width = get_width(lines, start);
-	printf("height: '%d'\nwidth: '%d'\n", data->map->map_height,
-		data->map->map_width);
 	y = 0;
 	malloc_map(&map, data->map->map_height, data->map->map_width);
 	while (y < data->map->map_height)
@@ -79,8 +77,8 @@ int	extract_map(t_data *data, char **lines)
 		copy_col(lines[start + y], map[y], data->map->map_width);
 		y++;
 	}
-	print_map(map, data->map->map_height, data->map->map_width);
 	data->map->map = map;
+	print_map(data);
 	return (1);
 }
 
@@ -100,6 +98,7 @@ int	map_valid(t_map *map)
 int	check_map(char *filename, t_data *data)
 {
 	char	**lines;
+	int		x;
 
 	lines = malloc_lines((const char *)filename);
 	if (!lines)
@@ -107,10 +106,11 @@ int	check_map(char *filename, t_data *data)
 	if (!extract_textures(data, lines) || !extract_colors(data, lines))
 		return (0);
 	extract_map(data, lines);
+	x = 0;
+	while (lines[x])
+		free(lines[x++]);
+	free(lines);
 	if (map_valid(data->map))
 		return (0);
 	return (1);
 }
-
-// has to be changed into new file for bonus and file parsing changed
-// or if F and C doesnt exist look for the other from bonus(better)

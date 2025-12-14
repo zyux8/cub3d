@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 17:09:56 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 01:54:12 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/14 23:36:25 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	get_floor(t_data *data, char **lines)
 
 	if (!is_texture(lines, "F "))
 	{
-		printf("getting floorclr\n");
 		fc = get_color(lines, "F ");
 		if (!fc)
 			return (printf("extract_colors: one or more colors not found\n"),
@@ -40,11 +39,12 @@ int	get_floor(t_data *data, char **lines)
 	}
 	else if (is_texture(lines, "F "))
 	{
-		p_f= get_single_text_path(lines, "F");
+		p_f = get_single_text_path(lines, "F");
 		if (!p_f)
 			return (printf("extract_colors: one or more colors not found\n"),
 				0);
 		data->map->tex_floor = get_texture(data, p_f);
+		free(p_f);
 	}
 	return (1);
 }
@@ -69,39 +69,38 @@ int	get_ceiling(t_data *data, char **lines)
 			return (printf("extract_colors: one or more colors not found\n"),
 				0);
 		data->map->tex_ceiling = get_texture(data, p_c);
+		free(p_c);
 	}
 	return (1);
 }
 
-// extract colors needs to be splitted into F and C
-
 int	extract_bonus(t_data *data, char **lines)
 {
-	char	*DO;
-	char	*SP;
+	char	*p_do;
+	char	*p_sp;
 
 	if (!data || !lines)
 		return (0);
 	if (is_texture(lines, "DO "))
 	{
-		DO = get_single_text_path(lines, "DO");
-		if (!DO)
-			return (free(DO),
+		p_do = get_single_text_path(lines, "DO");
+		if (!p_do)
+			return (free(p_do),
 				printf("extract_textures: missing texture path(s)\n"), 0);
 	}
 	if (is_texture(lines, "SP "))
 	{
-		SP = get_single_text_path(lines, "SP");
-		if (!SP)
-			return (free_paths(NULL, NULL, DO, SP),
+		p_sp = get_single_text_path(lines, "SP");
+		if (!p_sp)
+			return (free_paths(NULL, NULL, p_do, p_sp),
 				printf("extract_textures: missing texture path(s)\n"), 0);
 	}
 	if (!data->mlx)
-		return (free_paths(NULL, NULL, DO, SP),
+		return (free_paths(NULL, NULL, p_do, p_sp),
 			printf("extract_textures: data->mlx is NULL\n"), 0);
-	data->map->tex_door = get_texture(data, DO);
-	data->map->tex_sprite = get_texture(data, SP);
-	return (free_paths(NULL, NULL, DO, SP), 1);
+	data->map->tex_door = get_texture(data, p_do);
+	data->map->tex_sprite = get_texture(data, p_sp);
+	return (free_paths(NULL, NULL, p_do, p_sp), 1);
 }
 
 int	extract_colors(t_data *data, char **lines)

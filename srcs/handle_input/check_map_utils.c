@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:03:30 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 01:23:58 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/14 23:40:45 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ int	count_lines(const char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (-1);
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		x++;
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (x);
@@ -51,8 +53,9 @@ char	**malloc_lines(const char *filename)
 		return (NULL);
 	x = 0;
 	fd = open(filename, O_RDONLY);
-	while ((lines[x] = get_next_line(fd)) != NULL)
-		x++;
+	lines[x] = get_next_line(fd);
+	while (lines[x] != NULL)
+		lines[++x] = get_next_line(fd);
 	close(fd);
 	lines[x] = NULL;
 	return (lines);
@@ -72,8 +75,6 @@ void	free_paths(char *p_no, char *p_so, char *p_we, char *p_ea)
 
 int	is_map_char(char c)
 {
-	// if (!c)
-	// 	return (0);
 	return (c == ' ' || c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E'
 		|| c == 'W' || c == 'D' || c == 'P');
 }
