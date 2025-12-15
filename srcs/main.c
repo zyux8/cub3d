@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 23:47:46 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/15 03:05:19 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ int	main(int ac, char **av)
 	init_data(&data);
 	if (check_map(av[1], &data))
 		return (cleanup_and_exit(&data), 0);
-	for (int x = 100; x < 300; x++)
-		my_pixel_put(&data, x, 400, data.map->floor_color);
-	for (int y = 100; y < 300; y++)
-		my_pixel_put(&data, 200, y, data.map->ceiling_color);
+	draw_minimap(&data);
 	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
 	mlx_hook(data.win, 2, 1L << 0, handle_key, &data);
 	mlx_hook(data.win, 17, 0, handle_destroy, &data);

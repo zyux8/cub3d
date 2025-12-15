@@ -6,13 +6,14 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2025/12/14 21:32:50 by ohaker           ###   ########.fr        #
+#    Updated: 2025/12/15 02:31:46 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CFLAGS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Iminilibx-linux -g
 SRC = $(addprefix srcs/, \
+	draw_minimap/draw_minimap.c \
 	$(addprefix handle_input/, \
 	check_map_even_more.c \
 	check_map_utils_more.c \

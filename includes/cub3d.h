@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 21:32:30 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/15 03:08:08 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define KEY_DOWN 65364
 # define KEY_RIGHT 65363
 # define KEY_LEFT 65361
+# define MINIMAP_SIZE 12
 
 typedef struct s_map	t_map;
 
@@ -65,6 +66,13 @@ enum					e_map_info
 	DOOR,
 	SPRITE,
 };
+
+typedef struct s_playerpos
+{
+	int					x_pos;
+	int					y_pos;
+	int					facing;
+}						t_playerpos;
 
 typedef struct s_texture
 {
@@ -95,6 +103,18 @@ typedef struct s_map
 	enum e_map_info		player_facing;
 }						t_map;
 
+typedef struct s_minimap
+{
+	void				*img;
+	char				*addr;
+	int					bits_per_pixel;
+	int					line_length;
+	int					endian;
+}						t_minimap;
+
+// srcs/draw_minimap/draw_minimap.c
+int						draw_minimap(t_data *data);
+
 // srcs/handle_input/check_map_even_more.c
 char					*get_single_text_path(char **lines, char *sig);
 void					malloc_map(int ***map, int height, int width);
@@ -110,7 +130,6 @@ int						get_width(char **lines, int start);
 // srcs/handle_input/check_map_utils.c
 int						count_lines(const char *filename);
 char					**malloc_lines(const char *filename);
-int						create_rgb(int r, int g, int b);
 void					free_paths(char *p_no, char *p_so, char *p_we,
 							char *p_ea);
 int						is_map_char(char c);
@@ -141,5 +160,6 @@ void					cleanup_and_exit(t_data *data);
 
 // srcs/utils.c
 void					my_pixel_put(t_data *data, int x, int y, int color);
+int						create_rgb(int r, int g, int b);
 
 #endif
