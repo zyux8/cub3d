@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 23:42:13 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/17 22:52:23 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	print_map(t_data *data)
 
 	y = 0;
 	printf("\n");
-	while (y < data->map->map_height - 1)
+	while (y < data->map->map_height)
 	{
 		x = 0;
-		while (x < data->map->map_width - 1)
+		while (x < data->map->map_width)
 		{
 			printf("%d ", data->map->map[y][x]);
 			x++;
@@ -78,6 +78,7 @@ int	extract_map(t_data *data, char **lines)
 		y++;
 	}
 	data->map->map = map;
+	get_player_pos(data);
 	print_map(data);
 	return (1);
 }

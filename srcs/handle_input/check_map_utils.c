@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:03:30 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 23:40:45 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/17 22:52:07 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	**malloc_lines(const char *filename)
 	int		x;
 	int		fd;
 
-	printf("'%s'\n", filename);
 	if (!filename)
 		return (printf("invalid file\n"), NULL);
 	if (!ft_strnstr(filename, ".cub", ft_strlen(filename)))
@@ -79,24 +78,24 @@ int	is_map_char(char c)
 		|| c == 'W' || c == 'D' || c == 'P');
 }
 
-t_texture	*get_texture(t_data *data, char *path)
+t_img	*get_texture(t_data *data, char *path)
 {
-	t_texture	*texture;
+	t_img	*texture;
 
 	if (!data || !path)
 		return (NULL);
-	texture = malloc(sizeof(t_texture));
+	texture = malloc(sizeof(t_img));
 	if (!texture)
 		return (NULL);
-	texture->img_ptr = mlx_xpm_file_to_image(data->mlx, path, &texture->width,
+	texture->img = mlx_xpm_file_to_image(data->mlx, path, &texture->width,
 			&texture->height);
-	if (!texture->img_ptr)
+	if (!texture->img)
 	{
 		free(texture);
 		printf("get_texture: failed to load image '%s'\n", path);
 		return (NULL);
 	}
-	texture->addr = mlx_get_data_addr(texture->img_ptr,
-			&texture->bits_per_pixel, &texture->line_len, &texture->endian);
+	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
+			&texture->line_len, &texture->endian);
 	return (texture);
 }

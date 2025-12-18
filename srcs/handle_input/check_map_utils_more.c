@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:40:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 21:31:33 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/17 19:11:15 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_map(t_data *data)
 {
 	t_map	*map;
 
+	data->map = NULL;
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return ;
@@ -25,9 +26,9 @@ void	init_map(t_data *data)
 	map->tex_east = NULL;
 	map->tex_ceiling = NULL;
 	map->tex_floor = NULL;
+	map->map = NULL;
 	map->ceiling_color = -1;
 	map->floor_color = -1;
-	map->map = NULL;
 	map->player_facing = NONE;
 	data->map = map;
 }

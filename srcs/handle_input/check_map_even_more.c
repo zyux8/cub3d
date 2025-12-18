@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:47:58 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 23:42:55 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/17 22:50:54 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,51 @@ int	get_color(char **lines, char *sig)
 			ft_atoi(rgb_char[2]));
 	printf("rgb: '%d'\n", rgb);
 	return (ft_free_split(rgb_char), rgb);
+}
+
+t_playerpos	*init_player(int x, int y, int dir)
+{
+	t_playerpos	*player;
+	double		angle;
+
+	player = malloc(sizeof(t_playerpos));
+	if (!player)
+		return (NULL);
+	player->x_pos = x + 0.5;
+	player->y_pos = y + 0.5;
+	if (dir == PLAYER_N)
+		angle = 3.0 * PI / 2.0;
+	else if (dir == PLAYER_S)
+		angle = PI / 2.0;
+	else if (dir == PLAYER_E)
+		angle = 0.0;
+	else if (dir == PLAYER_W)
+		angle = PI;
+	else
+		angle = 0.0;
+	player->facing = angle;
+	return (player);
+}
+
+int	get_player_pos(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < data->map->map_height)
+	{
+		y = 0;
+		while (y < data->map->map_width)
+		{
+			if (data->map->map[x][y] >= PLAYER_N
+				&& data->map->map[x][y] <= PLAYER_W)
+				data->player = init_player(y, x, data->map->map[x][y]);
+			y++;
+		}
+		x++;
+	}
+	printf("player; x: '%f', y: '%f', dir: '%f'\n", data->player->x_pos,
+		data->player->y_pos, data->player->facing);
+	return (1);
 }
