@@ -6,32 +6,11 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/18 00:41:13 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/18 18:41:58 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_minimap(t_data *data)
-{
-	if (!data || !data->minimap)
-		exit(1);
-	data->minimap->img = ft_calloc(1, sizeof(t_img));
-	if (!data->minimap->img)
-		exit(1);
-	data->minimap->img->width = MINIMAP_W;
-	data->minimap->img->height = MINIMAP_H;
-	data->minimap->img->img = mlx_new_image(data->mlx, MINIMAP_W, MINIMAP_H);
-	if (!data->minimap->img->img)
-		exit(1);
-	data->minimap->img->addr = mlx_get_data_addr(data->minimap->img->img,
-			&data->minimap->img->bits_per_pixel, &data->minimap->img->line_len,
-			&data->minimap->img->endian);
-	if (!data->minimap->img->addr)
-		exit(1);
-	data->minimap->x_off = 0;
-	data->minimap->y_off = 0;
-}
 
 void	init_data(t_data *data)
 {
@@ -81,20 +60,6 @@ void	cleanup_and_exit(t_data *data)
 	exit(0);
 }
 
-void	update_player_pos(t_data *data)
-{
-	if (data->keys->key_up)
-		move_player(data, cos(data->player->facing) * MOVE_SPEED,
-			sin(data->player->facing) * MOVE_SPEED);
-	if (data->keys->key_do)
-		move_player(data, -cos(data->player->facing) * MOVE_SPEED,
-			-sin(data->player->facing) * MOVE_SPEED);
-	if (data->keys->key_le)
-		data->player->facing -= ROT_SPEED;
-	if (data->keys->key_ri)
-		data->player->facing += ROT_SPEED;
-}
-
 int	render_everything(t_data *data)
 {
 	update_player_pos(data);
@@ -107,8 +72,13 @@ int	render_everything(t_data *data)
 	// raycasting();
 	draw_minimap(data);
 	draw_player(data);
+	for (int x = 0; x < WIN_WIDTH; x++)
+		for (int y = 0; y < WIN_HEIGHT; y++)
+			my_pixel_put(data->view, x, y, create_rgb(140, 140, 140));
+	// grey background
 	mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img->img, 20, 20);
+	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img->img, 20,
+		20);
 	return (0);
 }
 
@@ -125,10 +95,6 @@ int	main(int ac, char **av)
 	if (check_map(av[1], &data))
 		return (cleanup_and_exit(&data), 0);
 	init_minimap(&data);
-	for (int x = 0; x < 250; x++)
-		my_pixel_put(data.view, 250, x, create_rgb(200, 40, 20));
-	for (int y = 0; y < 250; y++)
-		my_pixel_put(data.view, y, 250, create_rgb(200, 40, 20));
 	mlx_loop_hook(data.mlx, render_everything, &data);
 	mlx_hook(data.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.win, 3, 1L << 1, key_release, &data);

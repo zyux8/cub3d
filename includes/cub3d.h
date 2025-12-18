@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/18 01:20:12 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/18 17:09:51 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@
 # define KEY_S 115
 # define KEY_D 100
 # define MINIMAP_SIZE 1000
-# define TILE_SIZE 24
+# define TILE_SIZE 26
 # define MINIMAP_W 200
 # define MINIMAP_H 200
 # define MOVE_SPEED 0.12
-# define ROT_SPEED 0.05
+# define ROT_SPEED 0.1
 # define PI 3.141592653589793238462643383279502881971
 
 typedef struct s_map		t_map;
@@ -133,12 +133,12 @@ typedef struct s_minimap
 void						print_map(t_data *data);
 
 // srcs/draw_minimap/draw_minimap.c
+void						init_minimap(t_data *data);
 void						draw_player(t_data *data);
 void						draw_minimap(t_data *data);
 
 // srcs/draw_minimap/minimap_utils.c
-void						put_minimap_pixel(t_img *img, int x, int y,
-								int color);
+void						draw_frame(t_minimap *minimap);
 
 // srcs/handle_input/check_map_even_more.c
 char						*get_single_text_path(char **lines, char *sig);
@@ -178,9 +178,9 @@ void						copy_col(char *line, int *row, int width);
 int							map_valid(t_map *map);
 
 // srcs/input_handler.c
+void						update_player_pos(t_data *data);
 void						move_player(t_data *data, double move_x,
 								double move_y);
-// int							handle_key(int keycode, t_data *data);
 int							handle_destroy(t_data *data);
 int							key_press(int keycode, t_data *data);
 int							key_release(int keycode, t_data *data);

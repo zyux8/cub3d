@@ -6,11 +6,25 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:42:31 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/18 01:17:28 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/18 15:51:45 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	update_player_pos(t_data *data)
+{
+	if (data->keys->key_up)
+		move_player(data, cos(data->player->facing) * MOVE_SPEED,
+			sin(data->player->facing) * MOVE_SPEED);
+	if (data->keys->key_do)
+		move_player(data, -cos(data->player->facing) * MOVE_SPEED,
+			-sin(data->player->facing) * MOVE_SPEED);
+	if (data->keys->key_le)
+		data->player->facing -= ROT_SPEED;
+	if (data->keys->key_ri)
+		data->player->facing += ROT_SPEED;
+}
 
 void	move_player(t_data *data, double move_x, double move_y)
 {
@@ -55,28 +69,3 @@ int	key_release(int keycode, t_data *data)
 		data->keys->key_ri = 0;
 	return (0);
 }
-
-/*
-void	update_player_pos(t_data *data)
-{
-	if (data->key_w)
-		move_player(data, cos(data->player.angle) * MOVE_SPEED,
-			sin(data->player.angle) * MOVE_SPEED);
-	if (data->key_s)
-		move_player(data, -cos(data->player.angle) * MOVE_SPEED,
-			-sin(data->player.angle) * MOVE_SPEED);
-	if (data->key_a)
-		move_player(data, sin(data->player.angle) * MOVE_SPEED,
-			-cos(data->player.angle) * MOVE_SPEED);
-	if (data->key_d)
-		move_player(data, -sin(data->player.angle) * MOVE_SPEED,
-			cos(data->player.angle) * MOVE_SPEED);
-	if (data->key_left)
-		data->player.angle -= ROT_SPEED;
-	if (data->key_right)
-		data->player.angle += ROT_SPEED;
-}
-
-mlx_hook(data.win, 2, 1L << 0, key_press, &data);
-mlx_hook(data.win, 3, 1L << 1, key_release, &data);
-*/

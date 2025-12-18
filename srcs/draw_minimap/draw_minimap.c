@@ -6,11 +6,32 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 02:23:41 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/18 01:20:17 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/18 17:17:42 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_minimap(t_data *data)
+{
+	if (!data || !data->minimap)
+		exit(1);
+	data->minimap->img = ft_calloc(1, sizeof(t_img));
+	if (!data->minimap->img)
+		exit(1);
+	data->minimap->img->width = MINIMAP_W;
+	data->minimap->img->height = MINIMAP_H;
+	data->minimap->img->img = mlx_new_image(data->mlx, MINIMAP_W, MINIMAP_H);
+	if (!data->minimap->img->img)
+		exit(1);
+	data->minimap->img->addr = mlx_get_data_addr(data->minimap->img->img,
+			&data->minimap->img->bits_per_pixel, &data->minimap->img->line_len,
+			&data->minimap->img->endian);
+	if (!data->minimap->img->addr)
+		exit(1);
+	data->minimap->x_off = 0;
+	data->minimap->y_off = 0;
+}
 
 void	draw_square(t_img *minimap, int x_pos, int y_pos, int block)
 {
@@ -24,11 +45,11 @@ void	draw_square(t_img *minimap, int x_pos, int y_pos, int block)
 		while (y <= TILE_SIZE)
 		{
 			if (block == WALL)
-				put_minimap_pixel(minimap, x_pos + x, y_pos + y, create_rgb(180,
-						30, 30));
+				my_pixel_put(minimap, x_pos + x, y_pos + y, create_rgb(180, 30,
+						30));
 			else if (block != NONE)
-				put_minimap_pixel(minimap, x_pos + x, y_pos + y, create_rgb(45,
-						120, 20));
+				my_pixel_put(minimap, x_pos + x, y_pos + y, create_rgb(45, 120,
+						20));
 			y++;
 		}
 		x++;
@@ -46,7 +67,7 @@ void	draw_player_dot(t_data *data, int px, int py)
 		y = -4;
 		while (y <= 4)
 		{
-			put_minimap_pixel(data->minimap->img, px + x, py + y, 0xFFFF00);
+			my_pixel_put(data->minimap->img, px + x, py + y, 0xFFFF00);
 			y++;
 		}
 		x++;
@@ -62,14 +83,14 @@ void	draw_player(t_data *data)
 	x = 0;
 	center_x = 100;
 	center_y = 100;
-	draw_player_dot(data, center_x, center_y);
 	while (x < 50)
 	{
-		put_minimap_pixel(data->minimap->img, center_x
+		my_pixel_put(data->minimap->img, center_x
 			+ (int)(cos(data->player->facing) * x), center_x
 			+ (int)(sin(data->player->facing) * x), 0x0000FF);
 		x++;
 	}
+	draw_player_dot(data, center_x, center_y);
 }
 
 void	draw_minimap(t_data *data)
@@ -97,4 +118,5 @@ void	draw_minimap(t_data *data)
 		}
 		y++;
 	}
+	draw_frame(data->minimap);
 }

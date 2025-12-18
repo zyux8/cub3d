@@ -6,14 +6,26 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 23:51:41 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/18 00:51:50 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/18 17:15:29 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_minimap_pixel(t_img *img, int x, int y, int color)
+void	draw_frame(t_minimap *minimap)
 {
-	if (x >= 0 && x < MINIMAP_W && y >= 0 && y < MINIMAP_H)
-		my_pixel_put(img, x + 20, y + 20, color);
+	int	x;
+
+	x = 0;
+	while (x <= minimap->img->width)
+		my_pixel_put(minimap->img, x++, 0, create_rgb(0, 0, 0));
+	while (x >= 0)
+		my_pixel_put(minimap->img, x--, minimap->img->width - 1, create_rgb(0,
+				0, 0));
+	x = 0;
+	while (x <= minimap->img->height)
+		my_pixel_put(minimap->img, 0, x++, create_rgb(0, 0, 0));
+	while (x >= 0)
+		my_pixel_put(minimap->img, minimap->img->height - 1, x--, create_rgb(0,
+				0, 0));
 }
