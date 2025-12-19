@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 02:23:41 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 16:09:59 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 16:17:58 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	draw_square(t_data *data, int x_pos, int y_pos, int block)
 		{
 			if (block == WALL)
 				my_pixel_put(data->minimap->img, x_pos + x, y_pos + y,
-					create_rgb(180, 30, 30));
+					create_rgb(200, 200, 200));
 			else if (block == DOOR && !player_close_to_door(data))
 				my_pixel_put(data->minimap->img, x_pos + x, y_pos + y,
-					create_rgb(80, 80, 180));
+					create_rgb(200, 200, 200));
 			else if (block != NONE)
 				my_pixel_put(data->minimap->img, x_pos + x, y_pos + y,
-					create_rgb(45, 120, 20));
+					create_rgb(40, 40, 40));
 			y++;
 		}
 		x++;
@@ -70,7 +70,8 @@ void	draw_player_dot(t_data *data, int px, int py)
 		y = -4;
 		while (y <= 4)
 		{
-			my_pixel_put(data->minimap->img, px + x, py + y, 0xFFFF00);
+			my_pixel_put(data->minimap->img, px + x, py + y, create_rgb(220, 50,
+					50));
 			y++;
 		}
 		x++;
@@ -90,7 +91,7 @@ void	draw_player(t_data *data)
 	{
 		my_pixel_put(data->minimap->img, center_x
 			+ (int)(cos(data->player->facing) * x), center_x
-			+ (int)(sin(data->player->facing) * x), 0x0000FF);
+			+ (int)(sin(data->player->facing) * x), create_rgb(255, 220, 80));
 		x++;
 	}
 	draw_player_dot(data, center_x, center_y);
