@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 16:10:13 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 17:16:57 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,16 @@ void						draw_minimap(t_data *data);
 // srcs/draw_minimap/minimap_utils.c
 void						draw_frame(t_minimap *minimap);
 int							player_close_to_door(t_data *data);
+
+// srcs/frees/free_helpers.c
+void						free_img(t_img *img, void *mlx);
+void						free_minimap(t_minimap *mm, void *mlx);
+void						free_player(t_playerpos *p);
+void						free_keys(t_keys *k);
+void						free_lines(char **lines);
+
+// srcs/frees.free1.c
+void						cleanup_and_exit(t_data *data);
 
 // srcs/handle_input/check_map_even_more.c
 char						*get_single_text_path(char **lines, char *sig);

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:03:30 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/17 22:52:07 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 16:49:37 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_img	*get_texture(t_data *data, char *path)
 
 	if (!data || !path)
 		return (NULL);
-	texture = malloc(sizeof(t_img));
+	texture = ft_calloc(1, sizeof(t_img));
 	if (!texture)
 		return (NULL);
 	texture->img = mlx_xpm_file_to_image(data->mlx, path, &texture->width,

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 17:09:56 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/17 18:56:29 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 17:06:40 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	extract_bonus(t_data *data, char **lines)
 		if (!p_do)
 			return (free(p_do),
 				printf("extract_textures: missing texture path(s)\n"), 0);
+		data->map->tex_door = get_texture(data, p_do);
 	}
 	if (is_texture(lines, "SP "))
 	{
@@ -94,12 +95,11 @@ int	extract_bonus(t_data *data, char **lines)
 		if (!p_sp)
 			return (free_paths(NULL, NULL, p_do, p_sp),
 				printf("extract_textures: missing texture path(s)\n"), 0);
+		data->map->tex_sprite = get_texture(data, p_sp);
 	}
 	if (!data->mlx)
 		return (free_paths(NULL, NULL, p_do, p_sp),
 			printf("extract_textures: data->mlx is NULL\n"), 0);
-	data->map->tex_door = get_texture(data, p_do);
-	data->map->tex_sprite = get_texture(data, p_sp);
 	return (free_paths(NULL, NULL, p_do, p_sp), 1);
 }
 

@@ -6,7 +6,7 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2025/12/18 00:25:43 by ohaker           ###   ########.fr        #
+#    Updated: 2025/12/19 16:38:43 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,9 @@ CFLAGS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Iminilibx-linux -g
 SRC = $(addprefix srcs/, \
 	draw_minimap/draw_minimap.c \
 	draw_minimap/minimap_utils.c \
+	$(addprefix frees/, \
+	free1.c \
+	free_helpers.c) \
 	$(addprefix handle_input/, \
 	check_map_even_more.c \
 	check_map_utils_more.c \

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:12:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/14 23:43:45 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 16:49:59 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ int	check_rows(t_map *map)
 	map_temp = map->map;
 	if (!map_temp)
 		return (0);
-	while (map_temp[x] && x < map->map_height)
+	while (x < map->map_height && map_temp[x])
 	{
 		y = 0;
-		while (map_temp[x] && map_temp[x][y] == NONE)
+		while (y < map->map_width && map_temp[x][y] == NONE)
 			y++;
-		if (map_temp[x] && map_temp[x][y] != WALL)
+		if (y >= map->map_width || map_temp[x][y] != WALL)
 			return (printf("rows invalid: [%d][%d]\n", x, y), 0);
 		y = map->map_width - 1;
-		while (map_temp[x] && map_temp[x][y] == NONE)
+		while (y >= 0 && map_temp[x][y] == NONE)
 			y--;
-		if (map_temp[x] && map_temp[x][y] != WALL)
+		if (y < 0 || map_temp[x][y] != WALL)
 			return (printf("rows invalid: [%d][%d]\n", x, y), 0);
 		x++;
 	}
@@ -49,17 +49,17 @@ int	check_cols(t_map *map)
 	x = 0;
 	y = 0;
 	map_temp = map->map;
-	while (map_temp[x] && y < map->map_width)
+	while (y < map->map_width)
 	{
 		x = 0;
-		while (map_temp[x] && map_temp[x][y] == NONE)
+		while (x < map->map_height && map_temp[x][y] == NONE)
 			x++;
-		if (map_temp[x] && map_temp[x][y] != WALL)
+		if (x >= map->map_height || map_temp[x][y] != WALL)
 			return (printf("cols invalid\n"), 0);
 		x = map->map_height - 1;
-		while (map_temp[x] && map_temp[x][y] == NONE)
+		while (x >= 0 && map_temp[x][y] == NONE)
 			x--;
-		if (map_temp[x] && map_temp[x][y] != WALL)
+		if (x < 0 || map_temp[x][y] != WALL)
 			return (printf("cols invalid\n"), 0);
 		y++;
 	}

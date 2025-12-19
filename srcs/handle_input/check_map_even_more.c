@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:47:58 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/17 22:50:54 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 16:48:25 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,24 @@ void	malloc_map(int ***map, int height, int width)
 {
 	int	x;
 
-	*map = malloc(sizeof(int *) * (height + 1));
+	*map = ft_calloc((size_t)height + 1, sizeof(int *));
 	if (!*map)
 		return ;
 	x = 0;
 	while (x < height)
 	{
-		(*map)[x] = malloc(sizeof(int) * (width + 1));
+		(*map)[x] = ft_calloc((size_t)width + 1, sizeof(int));
+		if (!(*map)[x])
+		{
+			while (--x >= 0)
+				free((*map)[x]);
+			free(*map);
+			*map = NULL;
+			return ;
+		}
 		x++;
 	}
+	(*map)[height] = NULL;
 }
 
 int	get_color(char **lines, char *sig)

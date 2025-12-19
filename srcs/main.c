@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 15:28:41 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 16:50:38 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,32 +34,6 @@ void	init_data(t_data *data)
 	data->keys = init_key_struct();
 }
 
-void	cleanup_and_exit(t_data *data)
-{
-	if (!data)
-		exit(0);
-	if (data->view)
-	{
-		if (data->view->img)
-			mlx_destroy_image(data->mlx, data->view->img);
-		free(data->view);
-	}
-	if (data->minimap)
-	{
-		if (data->minimap->img->img)
-			mlx_destroy_image(data->mlx, data->minimap->img->img);
-		free(data->minimap);
-	}
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-	}
-	exit(0);
-}
-
 int	render_everything(t_data *data)
 {
 	update_player_pos(data);
@@ -75,14 +49,11 @@ int	render_everything(t_data *data)
 	for (int x = 0; x < WIN_WIDTH; x++)
 		for (int y = 0; y < WIN_HEIGHT; y++)
 			my_pixel_put(data->view, x, y, create_rgb(140, 140, 140));
-	// grey background
 	mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img->img, 20,
 		20);
 	mlx_put_image_to_window(data->mlx, data->win, data->map->tex_east->img, 500,
 		500);
-	// printf("player,x: '%f'\nplayer,y: '%f'\n", data->player->x_pos,
-	// 	data->player->y_pos);
 	return (0);
 }
 
@@ -99,6 +70,10 @@ int	main(int ac, char **av)
 	if (check_map(av[1], &data))
 		return (cleanup_and_exit(&data), 0);
 	init_minimap(&data);
+	for (int x = 0; x < 250; x++)
+		my_pixel_put(data.view, 250, x, create_rgb(200, 40, 20));
+	for (int y = 0; y < 250; y++)
+		my_pixel_put(data.view, y, 250, create_rgb(200, 40, 20));
 	mlx_loop_hook(data.mlx, render_everything, &data);
 	mlx_hook(data.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.win, 3, 1L << 1, key_release, &data);
