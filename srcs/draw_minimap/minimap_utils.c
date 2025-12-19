@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 23:51:41 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 16:12:21 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 16:14:45 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,17 @@ int	player_close_to_door(t_data *data)
 	map = data->map->map;
 	p_x = (int)data->player->x_pos;
 	p_y = (int)data->player->y_pos;
-	x = -1;
-	while (x <= 1)
+	x = -2;
+	while (++x <= 1)
 	{
-		y = -1;
-		while (y <= 1)
+		y = -2;
+		while (++y <= 1)
 		{
 			if (p_x + x >= 0 && p_x + x < data->map->map_width && p_y + y >= 0
 				&& p_y + y < data->map->map_height)
 				if (map[p_y + y][p_x + x] == DOOR)
 					return (1);
-			y++;
 		}
-		x++;
 	}
 	return (0);
 }
