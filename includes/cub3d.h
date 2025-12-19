@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/18 17:09:51 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 16:10:13 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define KEY_S 115
 # define KEY_D 100
 # define MINIMAP_SIZE 1000
-# define TILE_SIZE 26
+# define TILE_SIZE 28
 # define MINIMAP_W 200
 # define MINIMAP_H 200
 # define MOVE_SPEED 0.12
@@ -139,6 +139,7 @@ void						draw_minimap(t_data *data);
 
 // srcs/draw_minimap/minimap_utils.c
 void						draw_frame(t_minimap *minimap);
+int							player_close_to_door(t_data *data);
 
 // srcs/handle_input/check_map_even_more.c
 char						*get_single_text_path(char **lines, char *sig);

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/18 18:41:58 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 15:28:41 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ int	render_everything(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img->img, 20,
 		20);
+	mlx_put_image_to_window(data->mlx, data->win, data->map->tex_east->img, 500,
+		500);
+	// printf("player,x: '%f'\nplayer,y: '%f'\n", data->player->x_pos,
+	// 	data->player->y_pos);
 	return (0);
 }
 

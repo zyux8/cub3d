@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 02:23:41 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/18 17:17:42 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/19 16:09:59 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_minimap(t_data *data)
 	data->minimap->y_off = 0;
 }
 
-void	draw_square(t_img *minimap, int x_pos, int y_pos, int block)
+void	draw_square(t_data *data, int x_pos, int y_pos, int block)
 {
 	int	x;
 	int	y;
@@ -45,11 +45,14 @@ void	draw_square(t_img *minimap, int x_pos, int y_pos, int block)
 		while (y <= TILE_SIZE)
 		{
 			if (block == WALL)
-				my_pixel_put(minimap, x_pos + x, y_pos + y, create_rgb(180, 30,
-						30));
+				my_pixel_put(data->minimap->img, x_pos + x, y_pos + y,
+					create_rgb(180, 30, 30));
+			else if (block == DOOR && !player_close_to_door(data))
+				my_pixel_put(data->minimap->img, x_pos + x, y_pos + y,
+					create_rgb(80, 80, 180));
 			else if (block != NONE)
-				my_pixel_put(minimap, x_pos + x, y_pos + y, create_rgb(45, 120,
-						20));
+				my_pixel_put(data->minimap->img, x_pos + x, y_pos + y,
+					create_rgb(45, 120, 20));
 			y++;
 		}
 		x++;
@@ -112,8 +115,7 @@ void	draw_minimap(t_data *data)
 			draw_y = (y * TILE_SIZE) - (int)data->minimap->y_off;
 			if (draw_x > -TILE_SIZE && draw_x < 200 && draw_y > -TILE_SIZE
 				&& draw_y < 200)
-				draw_square(data->minimap->img, draw_x, draw_y,
-					data->map->map[y][x]);
+				draw_square(data, draw_x, draw_y, data->map->map[y][x]);
 			x++;
 		}
 		y++;
