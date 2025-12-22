@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 17:16:57 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/22 21:56:41 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ typedef struct s_minimap
 	double					y_off;
 }							t_minimap;
 
-void						print_map(t_data *data);
+void						init_data(t_data *data);
 
 // srcs/draw_minimap/draw_minimap.c
 void						init_minimap(t_data *data);
@@ -177,7 +177,7 @@ int							check_rows(t_map *map);
 int							check_cols(t_map *map);
 int							check_player(t_map *map);
 int							check_nones(t_map *map);
-int							check_map(char *filename, t_data *data);
+int							check_map(int ac, char **av, t_data *data);
 
 // srcs/handle_input/extract_texts.c
 int							extract_colors(t_data *data, char **lines);

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:27:15 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 17:16:19 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/22 19:16:58 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free_map_texts(t_map *map, void *mlx)
 		free_img(map->tex_south, mlx);
 	if (map->tex_west)
 		free_img(map->tex_west, mlx);
-	if (map->tex_west)
+	if (map->tex_east)
 		free_img(map->tex_east, mlx);
 	if (map->tex_floor)
 		free_img(map->tex_floor, mlx);

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 16:50:38 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/22 19:56:42 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_data(t_data *data)
 	data->view->width = WIN_WIDTH;
 	data->view->height = WIN_HEIGHT;
 	init_minimap(data);
+	data->player = NULL;
 	data->keys = init_key_struct();
 }
 
@@ -61,19 +62,8 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	if (ac < 2 || !ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
-	{
-		printf("Usage: './cub3d' <map.cub>\n");
-		return (1);
-	}
-	init_data(&data);
-	if (check_map(av[1], &data))
-		return (cleanup_and_exit(&data), 0);
-	init_minimap(&data);
-	for (int x = 0; x < 250; x++)
-		my_pixel_put(data.view, 250, x, create_rgb(200, 40, 20));
-	for (int y = 0; y < 250; y++)
-		my_pixel_put(data.view, y, 250, create_rgb(200, 40, 20));
+	if (!check_map(ac, av, &data))
+		return (cleanup_and_exit(&data), 1);
 	mlx_loop_hook(data.mlx, render_everything, &data);
 	mlx_hook(data.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.win, 3, 1L << 1, key_release, &data);
