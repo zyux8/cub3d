@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 02:23:41 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 16:40:14 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/22 22:18:57 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	init_minimap(t_data *data)
 	if (!data->minimap->img)
 		exit(1);
 	data->minimap->img->width = MINIMAP_W;
-	data->minimap->img->height = MINIMAP_H;
-	data->minimap->img->img = mlx_new_image(data->mlx, MINIMAP_W, MINIMAP_H);
+	data->minimap->img->height = MINIMAP_HEIGHT;
+	data->minimap->img->img = mlx_new_image(data->mlx, MINIMAP_W, MINIMAP_HEIGHT);
 	if (!data->minimap->img->img)
 		exit(1);
 	data->minimap->img->addr = mlx_get_data_addr(data->minimap->img->img,
@@ -106,7 +106,7 @@ void	draw_minimap(t_data *data)
 
 	y = 0;
 	data->minimap->x_off = (data->player->x_pos * TILE_SIZE) - (MINIMAP_W / 2);
-	data->minimap->y_off = (data->player->y_pos * TILE_SIZE) - (MINIMAP_H / 2);
+	data->minimap->y_off = (data->player->y_pos * TILE_SIZE) - (MINIMAP_HEIGHT / 2);
 	while (y < data->map->map_height)
 	{
 		x = 0;
