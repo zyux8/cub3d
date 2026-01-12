@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/12 19:42:26 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 22:22:41 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define KEY_S 115
 # define KEY_D 100
 # define SP 32
+# define KEY_Z 122
 # define MOUSE_SENSITIVITY 0.0005
 
 // srcs/input_handler.c
@@ -65,5 +66,7 @@ int		create_rgb(int r, int g, int b);
 t_keys	*init_key_struct(void);
 void	update_player_pos(t_data *data);
 void	move_player(t_data *data, double move_x, double move_y);
+
+int		load_cigar(t_data *data);
 
 #endif

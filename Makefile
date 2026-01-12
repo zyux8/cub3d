@@ -6,7 +6,7 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2025/12/19 16:38:43 by ohaker           ###   ########.fr        #
+#    Updated: 2026/01/12 22:00:00 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC = $(addprefix srcs/, \
 	more_more_more_utils.c \
 	validate_map.c \
 	) \
+	overlay/overlay1.c \
 	input_handler.c \
 	main.c \
 	utils.c)

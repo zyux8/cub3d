@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/12 18:03:22 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 22:14:40 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_data(t_data *data)
 	init_minimap(data);
 	data->player = NULL;
 	data->keys = init_key_struct();
+	data->cigar = get_texture(data, "maps/textures/cigarre.xpm");
 	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	mlx_mouse_hide(data->mlx, data->win);
 }
@@ -52,6 +53,7 @@ int	render_everything(t_data *data)
 	for (int x = 0; x < WIN_WIDTH; x++)
 		for (int y = 0; y < WIN_HEIGHT; y++)
 			my_pixel_put(data->view, x, y, create_rgb(140, 140, 140));
+	load_cigar(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img->img, 20,
 		20);
