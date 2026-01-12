@@ -6,18 +6,18 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/22 22:16:35 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/10 19:26:37 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../srcs/draw_minimap/minimap.h"
 # include "../srcs/frees/free.h"
 # include "../srcs/handle_input/input.h"
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
-# include "../srcs/draw_minimap/minimap.h"
 # include "structs.h"
 # include <errno.h>
 # include <fcntl.h>
@@ -46,6 +46,7 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define MOUSE_SENSITIVITY 0.0005
 
 // srcs/input_handler.c
 void	update_player_pos(t_data *data);
@@ -53,6 +54,7 @@ void	move_player(t_data *data, double move_x, double move_y);
 int		handle_destroy(t_data *data);
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
+int		mouse_move(int x, int y, t_data *data);
 
 // srcs/main.c
 void	init_data(t_data *data);

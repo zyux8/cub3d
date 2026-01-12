@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/22 19:56:42 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/10 19:29:13 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	init_data(t_data *data)
 	init_minimap(data);
 	data->player = NULL;
 	data->keys = init_key_struct();
+	// Right after you create your window
+	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	mlx_mouse_hide(data->mlx, data->win);
 }
 
 int	render_everything(t_data *data)
@@ -67,6 +70,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(data.mlx, render_everything, &data);
 	mlx_hook(data.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.win, 3, 1L << 1, key_release, &data);
+	mlx_hook(data.win, 6, 1L << 6, mouse_move, &data);
 	mlx_hook(data.win, 17, 0, handle_destroy, &data);
 	mlx_loop(data.mlx);
 	return (0);
