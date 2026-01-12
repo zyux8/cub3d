@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 15:28:41 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 18:03:22 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,10 @@ void	init_data(t_data *data)
 	data->view->width = WIN_WIDTH;
 	data->view->height = WIN_HEIGHT;
 	init_minimap(data);
+	data->player = NULL;
 	data->keys = init_key_struct();
-}
-
-void	cleanup_and_exit(t_data *data)
-{
-	if (!data)
-		exit(0);
-	if (data->view)
-	{
-		if (data->view->img)
-			mlx_destroy_image(data->mlx, data->view->img);
-		free(data->view);
-	}
-	if (data->minimap)
-	{
-		if (data->minimap->img->img)
-			mlx_destroy_image(data->mlx, data->minimap->img->img);
-		free(data->minimap);
-	}
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-	}
-	exit(0);
+	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	mlx_mouse_hide(data->mlx, data->win);
 }
 
 int	render_everything(t_data *data)
@@ -75,14 +52,9 @@ int	render_everything(t_data *data)
 	for (int x = 0; x < WIN_WIDTH; x++)
 		for (int y = 0; y < WIN_HEIGHT; y++)
 			my_pixel_put(data->view, x, y, create_rgb(140, 140, 140));
-	// grey background
 	mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img->img, 20,
 		20);
-	mlx_put_image_to_window(data->mlx, data->win, data->map->tex_east->img, 500,
-		500);
-	// printf("player,x: '%f'\nplayer,y: '%f'\n", data->player->x_pos,
-	// 	data->player->y_pos);
 	return (0);
 }
 
@@ -90,18 +62,12 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	if (ac < 2 || !ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
-	{
-		printf("Usage: './cub3d' <map.cub>\n");
-		return (1);
-	}
-	init_data(&data);
-	if (check_map(av[1], &data))
-		return (cleanup_and_exit(&data), 0);
-	init_minimap(&data);
+	if (!check_map(ac, av, &data))
+		return (cleanup_and_exit(&data), 1);
 	mlx_loop_hook(data.mlx, render_everything, &data);
 	mlx_hook(data.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.win, 3, 1L << 1, key_release, &data);
+	mlx_hook(data.win, 6, 1L << 6, mouse_move, &data);
 	mlx_hook(data.win, 17, 0, handle_destroy, &data);
 	mlx_loop(data.mlx);
 	return (0);

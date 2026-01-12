@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/17 22:52:23 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/22 21:46:56 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,46 +40,23 @@ int	extract_textures(t_data *data, char **lines)
 	return (1);
 }
 
-void	print_map(t_data *data)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	printf("\n");
-	while (y < data->map->map_height)
-	{
-		x = 0;
-		while (x < data->map->map_width)
-		{
-			printf("%d ", data->map->map[y][x]);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-	printf("\n");
-}
-
 int	extract_map(t_data *data, char **lines)
 {
 	int	start;
 	int	**map;
-	int	y;
+	int	x;
 
 	start = start_of_map(lines);
 	data->map->map_height = get_height(lines, start);
 	data->map->map_width = get_width(lines, start);
-	y = 0;
+	x = 0;
 	malloc_map(&map, data->map->map_height, data->map->map_width);
-	while (y < data->map->map_height)
+	while (x < data->map->map_height)
 	{
-		copy_col(lines[start + y], map[y], data->map->map_width);
-		y++;
+		copy_col(lines[start + x], map[x], data->map->map_width);
+		x++;
 	}
 	data->map->map = map;
-	get_player_pos(data);
-	print_map(data);
 	return (1);
 }
 
@@ -96,12 +73,15 @@ int	map_valid(t_map *map)
 	return (1);
 }
 
-int	check_map(char *filename, t_data *data)
+int	check_map(int ac, char **av, t_data *data)
 {
 	char	**lines;
 	int		x;
 
-	lines = malloc_lines((const char *)filename);
+	if (ac < 2 || !ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
+		return (printf("Usage: './cub3d' <map.cub>\n"), 0);
+	init_data(data);
+	lines = malloc_lines((const char *)av[1]);
 	if (!lines)
 		return (0);
 	if (!extract_textures(data, lines) || !extract_colors(data, lines))
@@ -111,7 +91,8 @@ int	check_map(char *filename, t_data *data)
 	while (lines[x])
 		free(lines[x++]);
 	free(lines);
-	if (map_valid(data->map))
+	if (!map_valid(data->map))
 		return (0);
+	get_player_pos(data);
 	return (1);
 }

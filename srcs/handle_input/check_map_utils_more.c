@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:40:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/17 19:11:15 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/12/22 19:17:05 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ void	init_map(t_data *data)
 	map->tex_south = NULL;
 	map->tex_west = NULL;
 	map->tex_east = NULL;
+	map->tex_door = NULL;
+	map->tex_sprite = NULL;
 	map->tex_ceiling = NULL;
 	map->tex_floor = NULL;
 	map->map = NULL;
+	map->map_height = 0;
+	map->map_width = 0;
 	map->ceiling_color = -1;
 	map->floor_color = -1;
 	map->player_facing = NONE;
