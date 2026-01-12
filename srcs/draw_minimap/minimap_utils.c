@@ -6,11 +6,12 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 23:51:41 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/22 19:19:21 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 17:58:24 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#define FOV 0.7
 
 void	draw_frame(t_minimap *minimap)
 {
@@ -56,4 +57,27 @@ int	player_close_to_door(t_data *data)
 		}
 	}
 	return (0);
+}
+
+void	draw_fov(t_data *data)
+{
+	float	x;
+	int		y;
+	int		z;
+
+	x = 0;
+	z = 0;
+	while (x < (FOV * 2))
+	{
+		y = 0;
+		while (y < 80)
+		{
+			my_pixel_put(data->minimap->img, 100
+				+ (int)(cos(data->player->facing - FOV + x) * y), 100
+				+ (int)(sin(data->player->facing - FOV + x) * y),
+				create_rgb(80, 80, 80));
+			y++;
+		}
+		x += 0.005;
+	}
 }

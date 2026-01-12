@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:47:58 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/22 20:01:50 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 18:01:33 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	get_color(char **lines, char *sig)
 	char	**rgb_char;
 
 	x = 0;
+	rgb_char = NULL;
 	while (lines[x] && ft_strnstr(lines[x], sig, ft_strlen(lines[x])) == NULL)
 		x++;
 	line = ft_strnstr(lines[x], sig, ft_strlen(lines[x]));
@@ -75,9 +76,7 @@ int	get_color(char **lines, char *sig)
 		return (0);
 	if (ft_strncmp(line, sig, ft_strlen(sig)) == 0)
 	{
-		line = ft_strtrim(line + ft_strlen(sig), " ");
-		line2 = ft_strtrim(line, "\n");
-		free(line);
+		line2 = ft_strtrim(line + ft_strlen(sig), " \n");
 		rgb_char = ft_split((const char *)line2, ',');
 		free(line2);
 	}

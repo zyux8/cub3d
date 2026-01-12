@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/10 19:26:37 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 18:02:59 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@
 # define MOUSE_SENSITIVITY 0.0005
 
 // srcs/input_handler.c
-void	update_player_pos(t_data *data);
-void	move_player(t_data *data, double move_x, double move_y);
 int		handle_destroy(t_data *data);
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
@@ -64,5 +62,7 @@ void	cleanup_and_exit(t_data *data);
 void	my_pixel_put(t_img *img, int x, int y, int color);
 int		create_rgb(int r, int g, int b);
 t_keys	*init_key_struct(void);
+void	update_player_pos(t_data *data);
+void	move_player(t_data *data, double move_x, double move_y);
 
 #endif

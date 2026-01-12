@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/10 19:29:13 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 18:03:22 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	init_data(t_data *data)
 	init_minimap(data);
 	data->player = NULL;
 	data->keys = init_key_struct();
-	// Right after you create your window
 	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	mlx_mouse_hide(data->mlx, data->win);
 }
@@ -56,8 +55,6 @@ int	render_everything(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img->img, 20,
 		20);
-	mlx_put_image_to_window(data->mlx, data->win, data->map->tex_east->img, 500,
-		500);
 	return (0);
 }
 

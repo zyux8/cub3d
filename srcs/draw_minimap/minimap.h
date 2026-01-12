@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:08:15 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/22 22:18:20 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 16:57:22 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	draw_minimap(t_data *data);
 // srcs/draw_minimap/minimap_utils.c
 void	draw_frame(t_minimap *minimap);
 int		player_close_to_door(t_data *data);
+void	draw_fov(t_data *data);
 
 #endif
