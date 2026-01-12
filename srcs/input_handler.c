@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:42:31 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/12 18:02:35 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 19:43:01 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	key_press(int keycode, t_data *data)
 		data->keys->key_le = 1;
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
 		data->keys->key_ri = 1;
+	if (keycode == SP)
+		data->keys->space = 1;
 	if (keycode == KEY_ESC)
 		cleanup_and_exit(data);
 	return (0);
@@ -43,6 +45,8 @@ int	key_release(int keycode, t_data *data)
 		data->keys->key_le = 0;
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
 		data->keys->key_ri = 0;
+	if (keycode == SP)
+		data->keys->space = 0;
 	return (0);
 }
 

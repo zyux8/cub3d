@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/12 18:02:59 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 19:42:26 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define SP 32
 # define MOUSE_SENSITIVITY 0.0005
 
 // srcs/input_handler.c

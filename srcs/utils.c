@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:34:48 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/12 18:02:41 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 19:44:47 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,30 @@ t_keys	*init_key_struct(void)
 	key->key_do = 0;
 	key->key_ri = 0;
 	key->key_le = 0;
+	key->space = 0;
 	return (key);
 }
 
 void	update_player_pos(t_data *data)
 {
-	if (data->keys->key_up)
-		move_player(data, cos(data->player->facing) * MOVE_SPEED,
-			sin(data->player->facing) * MOVE_SPEED);
-	if (data->keys->key_do)
-		move_player(data, -cos(data->player->facing) * MOVE_SPEED,
-			-sin(data->player->facing) * MOVE_SPEED);
+	if (data->keys->space)
+	{
+		if (data->keys->key_up)
+			move_player(data, cos(data->player->facing) * (MOVE_SPEED + 0.1),
+				sin(data->player->facing) * (MOVE_SPEED + 0.1));
+		if (data->keys->key_do)
+			move_player(data, -cos(data->player->facing) * (MOVE_SPEED + 0.1),
+				-sin(data->player->facing) * (MOVE_SPEED + 0.1));
+	}
+	else if (!data->keys->space)
+	{
+		if (data->keys->key_up)
+			move_player(data, cos(data->player->facing) * MOVE_SPEED,
+				sin(data->player->facing) * MOVE_SPEED);
+		if (data->keys->key_do)
+			move_player(data, -cos(data->player->facing) * MOVE_SPEED,
+				-sin(data->player->facing) * MOVE_SPEED);
+	}
 	if (data->keys->key_le)
 		data->player->facing -= ROT_SPEED;
 	if (data->keys->key_ri)
