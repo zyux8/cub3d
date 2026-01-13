@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:31:48 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 19:20:36 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 21:14:57 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	assign_pos(int *c, char sig)
 	else if (sig == 'W')
 		*c = PLAYER_W;
 	else if (sig == 'D')
-		*c = DOOR_C;
+		*c = DOOR;
 	else if (sig == 'P')
 		*c = SPRITE;
 }

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 02:23:41 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 19:27:08 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 21:15:44 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,13 @@ void	draw_player_dot(t_data *data, int px, int py)
 	int	x;
 	int	y;
 
-	x = -4;
-	while (x <= 4)
+	x = -5;
+	while (++x <= 4)
 	{
-		y = -4;
-		while (y <= 4)
-		{
+		y = -5;
+		while (++y <= 4)
 			my_pixel_put(data->minimap->img, px + x, py + y, create_rgb(250, 50,
 					50));
-			y++;
-		}
-		x++;
 	}
 }
 
