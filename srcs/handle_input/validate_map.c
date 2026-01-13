@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:12:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 16:49:59 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 19:19:54 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	valid_none(t_map *map, int x, int y)
 		return (0);
 	tmap = map->map;
 	if (x < 0 || x > map->map_height || y < 0 || y > map->map_width)
-		return (printf("here\n"), 0);
+		return (0);
 	if (y - 1 >= 0 && (tmap[x][y - 1] == GROUND || (tmap[x][y - 1] >= PLAYER_N
 		&& tmap[x][y - 1] <= PLAYER_W)))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:06:01 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/12 20:46:47 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 19:27:13 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	t_playerpos				*player;
 	t_keys					*keys;
 	t_img					*cigar;
+	t_img					*smoke;
 }							t_data;
 
 enum						e_map_info

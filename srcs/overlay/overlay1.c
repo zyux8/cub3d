@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:43:31 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/12 22:20:57 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 17:41:16 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,14 @@ int	load_cigar(t_data *data)
 {
 	if (data->keys->key_z)
 	{
-		if (data->cigar != NULL)
-			overlay_image(data->view, data->cigar, WIN_WIDTH - (WIN_WIDTH / 2.7), WIN_HEIGHT - 340);
-			else
+		if (data->cigar != NULL && data->smoke != NULL)
+		{
+			overlay_image(data->view, data->smoke, WIN_WIDTH - (WIN_WIDTH
+					/ 2.7) + 20, WIN_HEIGHT - 900);
+			overlay_image(data->view, data->cigar, WIN_WIDTH - (WIN_WIDTH
+					/ 2.7), WIN_HEIGHT - 340);
+		}
+		else
 			return (1);
 	}
 	return (0);
