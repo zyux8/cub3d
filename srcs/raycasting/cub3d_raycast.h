@@ -6,21 +6,12 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:43:24 by pbarthol          #+#    #+#             */
-/*   Updated: 2025/12/11 21:40:55 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/13 22:59:22 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_RAYCAST_H
 # define CUB3D_RAYCAST_H
-
-# include "cub3d.h"
-
-# define PI 3.141592653589f
-
-typedef	struct s_raycast_data
-{
-	float	fov;
-}	t_raycast_data;
 
 /**
  * Required data:
@@ -29,15 +20,12 @@ typedef	struct s_raycast_data
  * - screen_width (pixels)
  */
 
-typedef	struct s_player_data
-{
-	int		player_x;
-	int		player_y;
-	float	player_dir;
-}	t_player_data;
-
 /**
  * Calculations for raytracing:
+ * 
+ * -----------------------------------------------------------------------------
+ * "facing" in struct "t_playerpos" is already in radians. No conversion
+ * needed.
  * 
  * To get the viewingDirection we have to convert playerAngle from degrees to
  * radians. 360 degrees equals 2 x PI. Conversion look like this:
@@ -47,9 +35,11 @@ typedef	struct s_player_data
  * - radians -> degrees:
  * 		deg = rad * (180 / PI)
  * 
- * Next thing is the FOV. The maximum FOV is 180 deg, a normal. To calculate the
- * FOV devide 180 by the target FOV in deg. Then devide PI by this and you get
- * the FOV in radians.
+ * -----------------------------------------------------------------------------
+ * 
+ * Next is the FOV. The maximum FOV is 180 deg. To calculate the FOV devide 180
+ * by the target FOV in deg. Then devide PI by the res and you get the FOV in
+ * radians.
  * 
  * 		x = 180 / targetFOV
  * 		FOV = PI / x
@@ -58,7 +48,7 @@ typedef	struct s_player_data
  * that we need the screenWidth in pixels. Every column on the screen gets it's
  * own ray. The camera plain is perpendicular to the playerDir. So to start from
  * the left we take playerAngle and subtract half of the FOV. Now we add x times
- * FOV devided by the screenWidth. x is the columns we want to draw. By dividing
+ * FOV devided by the screenWidth. x is the column we want to draw. By dividing
  * FOV by the screenWidth we get the number of columns we have. By adding this
  * times x to the furthest left angle we get the rayAngle for every column.
  * 
@@ -70,8 +60,8 @@ typedef	struct s_player_data
  * 		rayDirX = cos(rayAngle)
  * 		rayDirY = sin(rayAngle)
  * 
- * Taking rayDir by t and adding it to the playerPos the ray moves forward. In
- * this case t is the distance traveled. We again do this for X and Y.
+ * Taking rayDir times t and adding it to the playerPos the ray moves forward.
+ * In this case t is the distance traveled. We again do this for X and Y.
  * 
  * 		rayX = playerPosX + rayDirX * t
  * 		rayY = playerPosY + rayDirY * t
@@ -91,8 +81,8 @@ typedef	struct s_player_data
  * the math.h library. These functions round a number to the next integer either
  * up or down. If the direction is > 0 we use ceil(), if it is < 0 we use
  * floor(). Depending on the direction we take playerPos and the result and
- * subtract the larger from the smaller number. That is the difference is the
- * first t. After that we continue with the grid stepping.
+ * subtract the larger from the smaller number. The difference is the first t.
+ * After that we continue with the grid stepping.
  * 
  * 	- rayDirX > 0
  * 		initialX = playerPosX - ceil(playerPosX)

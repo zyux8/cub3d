@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_even_more.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:47:58 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/12 18:01:33 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 22:59:47 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	get_color(char **lines, char *sig)
 	line = ft_strnstr(lines[x], sig, ft_strlen(lines[x]));
 	if (!line)
 		return (0);
+	rgb_char = NULL;
 	if (ft_strncmp(line, sig, ft_strlen(sig)) == 0)
 	{
 		line2 = ft_strtrim(line + ft_strlen(sig), " \n");
