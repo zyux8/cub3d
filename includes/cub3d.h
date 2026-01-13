@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 16:10:13 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 17:14:06 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define MINIMAP_H 200
 # define MOVE_SPEED 0.12
 # define ROT_SPEED 0.1
+# define FOV 70
 # define PI 3.141592653589793238462643383279502881971
 
 typedef struct s_map		t_map;
@@ -70,6 +71,7 @@ typedef struct s_data
 {
 	void					*mlx;
 	void					*win;
+	float					actual_fov;
 	t_img					*view;
 	t_map					*map;
 	t_minimap				*minimap;
@@ -131,6 +133,9 @@ typedef struct s_minimap
 }							t_minimap;
 
 void						print_map(t_data *data);
+
+// srcs/raycasting/cub3d_raycast_main.c
+void						c3_rycst_main(t_data *data);
 
 // srcs/draw_minimap/draw_minimap.c
 void						init_minimap(t_data *data);

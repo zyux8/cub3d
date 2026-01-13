@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 15:28:41 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/12 17:24:56 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init_data(t_data *data)
 	data->view->height = WIN_HEIGHT;
 	init_minimap(data);
 	data->keys = init_key_struct();
+	data->actual_fov = PI / (180 / FOV);
 }
 
 void	cleanup_and_exit(t_data *data)
@@ -69,18 +70,18 @@ int	render_everything(t_data *data)
 	if (data->minimap && data->minimap->img->addr)
 		ft_bzero(data->minimap->img->addr, (size_t)data->minimap->img->line_len
 			* (size_t)data->minimap->img->height);
-	// raycasting();
+	c3_rycst_main(data);
 	draw_minimap(data);
 	draw_player(data);
 	for (int x = 0; x < WIN_WIDTH; x++)
 		for (int y = 0; y < WIN_HEIGHT; y++)
 			my_pixel_put(data->view, x, y, create_rgb(140, 140, 140));
 	// grey background
-	mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
+	// mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img->img, 20,
 		20);
-	mlx_put_image_to_window(data->mlx, data->win, data->map->tex_east->img, 500,
-		500);
+	// mlx_put_image_to_window(data->mlx, data->win, data->map->tex_east->img, 500,
+	// 	500);
 	// printf("player,x: '%f'\nplayer,y: '%f'\n", data->player->x_pos,
 	// 	data->player->y_pos);
 	return (0);

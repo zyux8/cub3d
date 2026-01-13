@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
+#    By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2025/12/18 00:25:43 by ohaker           ###   ########.fr        #
+#    Updated: 2026/01/12 17:17:01 by pbarthol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ SRC = $(addprefix srcs/, \
 	extract_texts.c \
 	more_more_more_utils.c \
 	validate_map.c \
+	) \
+	$(addprefix raycasting/, \
+	cub3d_raycast_main.c \
 	) \
 	input_handler.c \
 	main.c \
