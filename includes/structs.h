@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:06:01 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 19:27:13 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 21:25:51 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct s_map		t_map;
 typedef struct s_playerpos	t_playerpos;
 typedef struct s_keys		t_keys;
 typedef struct s_minimap	t_minimap;
+typedef struct s_cigar		t_cigar;
 
 typedef struct s_img
 {
@@ -38,8 +39,7 @@ typedef struct s_data
 	t_minimap				*minimap;
 	t_playerpos				*player;
 	t_keys					*keys;
-	t_img					*cigar;
-	t_img					*smoke;
+	t_cigar					*cigar;
 }							t_data;
 
 enum						e_map_info
@@ -96,5 +96,11 @@ typedef struct s_minimap
 	double					x_off;
 	double					y_off;
 }							t_minimap;
+
+typedef struct s_cigar
+{
+	t_img					*cigar;
+	t_img					*smoke;
+}							t_cigar;
 
 #endif

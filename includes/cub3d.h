@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 17:42:55 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 21:58:54 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ t_keys	*init_key_struct(void);
 void	update_player_pos(t_data *data);
 void	move_player(t_data *data, double move_x, double move_y);
 
+// overlay/overlay1.c
 int		load_cigar(t_data *data);
+t_cigar	*init_cigar(t_data *data);
 
 #endif

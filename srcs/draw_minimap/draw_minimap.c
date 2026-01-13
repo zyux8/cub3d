@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 02:23:41 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 21:15:44 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 21:22:08 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,23 +95,24 @@ void	draw_minimap(t_data *data)
 	int	draw_x;
 	int	draw_y;
 
-	y = 0;
+	y = -1;
+	if (data->minimap && data->minimap->img->addr)
+		ft_bzero(data->minimap->img->addr, (size_t)data->minimap->img->line_len
+			* (size_t)data->minimap->img->height);
 	data->minimap->x_off = (data->player->x_pos * TILE_SIZE) - (MINIMAP_W / 2);
 	data->minimap->y_off = (data->player->y_pos * TILE_SIZE) - (MINIMAP_HEIGHT
 			/ 2);
-	while (y < data->map->map_height)
+	while (++y < data->map->map_height)
 	{
-		x = 0;
-		while (x < data->map->map_width)
+		x = -1;
+		while (++x < data->map->map_width)
 		{
 			draw_x = (x * TILE_SIZE) - (int)data->minimap->x_off;
 			draw_y = (y * TILE_SIZE) - (int)data->minimap->y_off;
 			if (draw_x > -TILE_SIZE && draw_x < 200 && draw_y > -TILE_SIZE
 				&& draw_y < 200)
 				draw_square(data, draw_x, draw_y, data->map->map[y][x]);
-			x++;
 		}
-		y++;
 	}
 	draw_frame(data->minimap);
 }

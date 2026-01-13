@@ -6,11 +6,32 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:43:31 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 17:41:16 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 21:42:23 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_cigar	*init_cigar(t_data *data)
+{
+	t_cigar	*cigar;
+	int		fd1;
+	int		fd2;
+
+	cigar = malloc(sizeof(t_cigar));
+	if (!cigar)
+		return (NULL);
+	fd1 = open("maps/textures/cigarre.xpm", R_OK);
+	fd2 = open("maps/textures/smoke.xpm", R_OK);
+	if (fd1 > 0 && fd2 > 0)
+	{
+		cigar->cigar = get_texture(data, "maps/textures/cigarre.xpm");
+		cigar->smoke = get_texture(data, "maps/textures/smoke.xpm");
+	}
+	else
+		return (close(fd1), close(fd2), NULL);
+	return (close(fd1), close(fd2), cigar);
+}
 
 static int	get_pixel_color(t_img *img, int x, int y)
 {
@@ -53,11 +74,11 @@ int	load_cigar(t_data *data)
 {
 	if (data->keys->key_z)
 	{
-		if (data->cigar != NULL && data->smoke != NULL)
+		if (data->cigar->cigar != NULL && data->cigar->smoke != NULL)
 		{
-			overlay_image(data->view, data->smoke, WIN_WIDTH - (WIN_WIDTH
-					/ 2.7) + 20, WIN_HEIGHT - 900);
-			overlay_image(data->view, data->cigar, WIN_WIDTH - (WIN_WIDTH
+			overlay_image(data->view, data->cigar->smoke, WIN_WIDTH - (WIN_WIDTH / 2.7)
+				+ 20, WIN_HEIGHT - 900);
+			overlay_image(data->view, data->cigar->cigar, WIN_WIDTH - (WIN_WIDTH
 					/ 2.7), WIN_HEIGHT - 340);
 		}
 		else

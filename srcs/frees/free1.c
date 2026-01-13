@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:27:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 21:03:45 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 21:56:20 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,26 @@ void	free_map(t_map *map, void *mlx)
 	free(map);
 }
 
+void	free_cigar(t_cigar *cigar, void *mlx)
+{
+	if (cigar->cigar)
+		free_img(cigar->cigar, mlx);
+	if (cigar->smoke)
+		free_img(cigar->smoke, mlx);
+	if (cigar)
+		free(cigar);
+}
+
 void	cleanup_and_exit(t_data *data)
 {
 	if (!data)
 		exit(0);
 	if (data->view)
 		free_img(data->view, data->mlx);
-	if (data->cigar)
-		free_img(data->cigar, data->mlx);
-	if (data->smoke)
-		free_img(data->smoke, data->mlx);
 	if (data->minimap)
 		free_minimap(data->minimap, data->mlx);
+	if (data->cigar)
+		free_cigar(data->cigar, data->mlx);
 	if (data->map)
 		free_map(data->map, data->mlx);
 	if (data->player)

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:34:48 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/12 19:44:47 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/13 21:46:28 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_keys	*init_key_struct(void)
 	key->key_ri = 0;
 	key->key_le = 0;
 	key->space = 0;
+	key->key_z = 0;
 	return (key);
 }
 
