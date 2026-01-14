@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:10:38 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/22 22:15:34 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/14 16:07:08 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FREE_H
 # define FREE_H
-
-# include "structs.h"
 
 // srcs/frees/free_helpers.c
 void	free_img(t_img *img, void *mlx);

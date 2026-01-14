@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 23:51:41 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 19:27:06 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/14 16:13:16 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#define FOV 0.7
 
 void	draw_frame(t_minimap *minimap)
 {
@@ -65,14 +64,14 @@ void	draw_fov(t_data *data)
 	int		y;
 
 	x = 0;
-	while (x < (FOV * 2))
+	while (x < ((FOV / 10) * 2))
 	{
 		y = 0;
 		while (y < 80)
 		{
 			my_pixel_put(data->minimap->img, 100
-				+ (int)(cos(data->player->facing - FOV + x) * y), 100
-				+ (int)(sin(data->player->facing - FOV + x) * y),
+				+ (int)(cos(data->player->facing - (FOV / 10) + x) * y), 100
+				+ (int)(sin(data->player->facing - (FOV / 10) + x) * y),
 				create_rgb(80, 80, 80));
 			y++;
 		}

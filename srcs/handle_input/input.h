@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 21:57:19 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/22 22:17:10 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/14 16:03:43 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INPUT_H
 # define INPUT_H
-
-# include "structs.h"
 
 // srcs/handle_input/check_map_even_more.c
 char	*get_single_text_path(char **lines, char *sig);

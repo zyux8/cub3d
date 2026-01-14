@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 23:01:53 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/14 18:00:59 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,7 @@ void	init_data(t_data *data)
 	init_minimap(data);
 	data->player = NULL;
 	data->keys = init_key_struct();
-	data->actual_fov = PI / (180 / FOV);
-}
-
-void	cleanup_and_exit(t_data *data)
-{
-	if (!data)
-		exit(0);
-	if (data->view)
-	{
-		if (data->view->img)
-			mlx_destroy_image(data->mlx, data->view->img);
-		free(data->view);
-	}
-	if (data->minimap)
-	{
-		if (data->minimap->img->img)
-			mlx_destroy_image(data->mlx, data->minimap->img->img);
-		free(data->minimap);
-	}
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-	}
-	exit(0);
+	data->view->actual_fov = PI / (180 / (FOV * 10));
 	data->cigar = init_cigar(data);
 	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	mlx_mouse_hide(data->mlx, data->win);

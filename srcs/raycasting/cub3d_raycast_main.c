@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:42:20 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/13 22:59:29 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:12:25 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	c3_rycst_main(t_data *data)
 	i = -1;
 	while (++i < WIN_WIDTH)
 	{
-		ray_angle = data->player->facing - (data->actual_fov / 2) + i * (data->actual_fov / WIN_WIDTH);
+		ray_angle = data->player->facing - (data->view->actual_fov / 2) + i * (data->view->actual_fov / WIN_WIDTH);
 		ray_dir_x = cos(ray_angle);
 		ray_dir_y = sin(ray_angle);
 		ray_pos_x = data->player->x_pos;
@@ -154,7 +154,7 @@ void	c3_rycst_main(t_data *data)
 			if (data->map->map[ray_pos_y][ray_pos_x] == 1 || (data->map->map[ray_pos_y][ray_pos_x] == DOOR && !player_close_to_door(data)))
 			{
 				angle_a = fabs(ray_angle - data->player->facing);
-				if (angle_a > data->actual_fov / 2)
+				if (angle_a > data->view->actual_fov / 2)
 					angle_a -= (2 * PI);
 				dist *= cos(angle_a);
 				draw_line(data, i, dist);

@@ -6,7 +6,7 @@
 #    By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/13 22:55:36 by pbarthol         ###   ########.fr        #
+#    Updated: 2026/01/14 18:02:46 by pbarthol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = cub3d
 CFLAGS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Iminilibx-linux -g
 SRC = $(addprefix srcs/, \
 	draw_minimap/draw_minimap.c \
-	draw_minimap/minimap_utils.c \
+	draw_minimap/draw_minimap_utils.c \
 	$(addprefix frees/, \
-	free1.c \
+	free.c \
 	free_helpers.c) \
 	$(addprefix handle_input/, \
 	check_map_even_more.c \
@@ -30,6 +30,7 @@ SRC = $(addprefix srcs/, \
 	$(addprefix raycasting/, \
 	cub3d_raycast_main.c \
 	) \
+	overlay/overlay1.c \
 	input_handler.c \
 	main.c \
 	utils.c)
