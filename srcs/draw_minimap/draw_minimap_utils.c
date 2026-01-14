@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_utils.c                                    :+:      :+:    :+:   */
+/*   draw_minimap_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 23:51:41 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 16:13:16 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/14 19:45:13 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#define FOV2 0.8
 
 void	draw_frame(t_minimap *minimap)
 {
@@ -64,14 +65,15 @@ void	draw_fov(t_data *data)
 	int		y;
 
 	x = 0;
-	while (x < ((FOV / 10) * 2))
+	// printf("1: '%f'\n2: '%f'\n", data->view->actual_fov, (FOV2 * 2));
+	while (x < data->view->actual_fov)
 	{
 		y = 0;
 		while (y < 80)
 		{
 			my_pixel_put(data->minimap->img, 100
-				+ (int)(cos(data->player->facing - (FOV / 10) + x) * y), 100
-				+ (int)(sin(data->player->facing - (FOV / 10) + x) * y),
+				+ (int)(cos(data->player->facing - FOV2 + x) * y), 100
+				+ (int)(sin(data->player->facing - FOV2 + x) * y),
 				create_rgb(80, 80, 80));
 			y++;
 		}

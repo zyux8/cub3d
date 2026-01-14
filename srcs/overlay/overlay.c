@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   overlay1.c                                         :+:      :+:    :+:   */
+/*   overlay.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:43:31 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 21:42:23 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/14 19:15:49 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_cigar	*init_cigar(t_data *data)
 	fd2 = open("maps/textures/smoke.xpm", R_OK);
 	if (fd1 > 0 && fd2 > 0)
 	{
+		printf("found texts\n");
 		cigar->cigar = get_texture(data, "maps/textures/cigarre.xpm");
 		cigar->smoke = get_texture(data, "maps/textures/smoke.xpm");
 	}
@@ -76,8 +77,8 @@ int	load_cigar(t_data *data)
 	{
 		if (data->cigar->cigar != NULL && data->cigar->smoke != NULL)
 		{
-			overlay_image(data->view, data->cigar->smoke, WIN_WIDTH - (WIN_WIDTH / 2.7)
-				+ 20, WIN_HEIGHT - 900);
+			overlay_image(data->view, data->cigar->smoke, WIN_WIDTH - (WIN_WIDTH
+					/ 2.7) + 20, WIN_HEIGHT - 900);
 			overlay_image(data->view, data->cigar->cigar, WIN_WIDTH - (WIN_WIDTH
 					/ 2.7), WIN_HEIGHT - 340);
 		}

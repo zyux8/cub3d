@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:08:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 16:17:15 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/14 19:12:10 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 // srcs/draw_minimap/draw_minimap.c
 void	init_minimap(t_data *data);
 void	draw_player(t_data *data);
+void	draw_square(t_data *data, int x_pos, int y_pos, int block);
 void	draw_minimap(t_data *data);
 
 // srcs/draw_minimap/draw_minimap_utils.c

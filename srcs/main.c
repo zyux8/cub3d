@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 18:00:59 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/14 19:47:58 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_data(t_data *data)
 	init_minimap(data);
 	data->player = NULL;
 	data->keys = init_key_struct();
-	data->view->actual_fov = PI / (180 / (FOV * 10));
+	data->view->actual_fov = FOV * (PI / 180);
 	data->cigar = init_cigar(data);
 	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	mlx_mouse_hide(data->mlx, data->win);
@@ -42,14 +42,10 @@ void	init_data(t_data *data)
 int	render_everything(t_data *data)
 {
 	update_player_pos(data);
-	if (data->view && data->view->addr) //here
-		ft_bzero(data->view->addr, (size_t)data->view->line_len //there
-			* (size_t)data->view->height); // and that into main raycasting function pls
 	c3_rycst_main(data);
 	draw_minimap(data);
-	draw_player(data);
 	load_cigar(data);
-	// mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img->img, 20,
 		20);
 	return (0);

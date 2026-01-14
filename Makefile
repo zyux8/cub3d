@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+         #
+#    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/14 18:02:46 by pbarthol         ###   ########.fr        #
+#    Updated: 2026/01/14 18:41:41 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC = $(addprefix srcs/, \
 	$(addprefix raycasting/, \
 	cub3d_raycast_main.c \
 	) \
-	overlay/overlay1.c \
+	overlay/overlay.c \
 	input_handler.c \
 	main.c \
 	utils.c)

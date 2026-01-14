@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_raycast_main.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:42:20 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/14 16:12:25 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/14 19:42:50 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ unsigned int	c3_rycst_shade(unsigned int color, float dist)
 	r = (color >> 16) & 0xFF;
 	g = (color >> 8) & 0xFF;
 	b = color & 0xFF;
-
 	shade = 1 / dist;
 	if (shade > 1)
 		shade = 1;
 	r = (unsigned char)(r * shade);
 	g = (unsigned char)(g * shade);
 	b = (unsigned char)(b * shade);
-
 	return ((r << 16) | (g << 8) | b);
 }
 
@@ -58,30 +56,48 @@ void	draw_line(t_data *data, int pixel_col, float dist)
 {
 	int	i;
 	int	line_height;
+	int	start;
+	int	end;
 
 	if (dist < 1)
 		line_height = WIN_HEIGHT;
-	else if (dist < 5)
-		line_height = WIN_HEIGHT / dist;
 	else
-		line_height = (WIN_HEIGHT / 2) / dist;
+		line_height = WIN_HEIGHT / dist;
 	i = 0;
 	while (i < WIN_HEIGHT / 2)
 	{
-		if (!(pixel_col > 20 && pixel_col < 20 + MINIMAP_W) || !(i > 20 && i < 20 + MINIMAP_H))
-			mlx_pixel_put(data->mlx, data->win, pixel_col, i, data->map->ceiling_color);
+		if (!(pixel_col >= 20 && pixel_col < 20 + MINIMAP_W) || !(i >= 20
+				&& i < 20 + MINIMAP_H))
+			my_pixel_put(data->view, pixel_col, i, data->map->ceiling_color);
 		i++;
 	}
 	while (i < WIN_HEIGHT)
 	{
-		mlx_pixel_put(data->mlx, data->win, pixel_col, i, data->map->floor_color);
+		my_pixel_put(data->view, pixel_col, i, data->map->floor_color);
 		i++;
 	}
-	i = (WIN_HEIGHT / 2) - (line_height / 2);
-	while (i < line_height)
+	// i = (WIN_HEIGHT / 2) - (line_height / 2);
+	// while (i < line_height)
+	// {
+	// 	if (!(pixel_col >= 20 && pixel_col < 20 + MINIMAP_W) || !(i >= 20
+	// 			&& i < 20 + MINIMAP_H))
+	// 		my_pixel_put(data->view, pixel_col, i,
+	// 			c3_rycst_shade(create_rgb(20, 20, 200), dist));
+	// 	i++;
+	// }
+	start = (WIN_HEIGHT / 2) - (line_height / 2);
+	end = start + line_height;
+	if (start < 0)
+		start = 0;
+	if (end > WIN_HEIGHT)
+		end = WIN_HEIGHT;
+	i = start;
+	while (i < end)
 	{
-		if (!(pixel_col > 20 && pixel_col < 20 + MINIMAP_W) || !(i > 20 && i < 20 + MINIMAP_H))
-			mlx_pixel_put(data->mlx, data->win, pixel_col, i, c3_rycst_shade(create_rgb(20, 20, 200), dist));
+		if (!(pixel_col >= 20 && pixel_col < 20 + MINIMAP_W) || !(i >= 20
+				&& i < 20 + MINIMAP_H))
+			my_pixel_put(data->view, pixel_col, i, c3_rycst_shade(create_rgb(20,
+						20, 200), dist));
 		i++;
 	}
 }
@@ -106,9 +122,15 @@ void	c3_rycst_main(t_data *data)
 	float	angle_a;
 
 	i = -1;
+	ray_pos_y = 0;
+	ray_pos_x = 0;
+	if (data->view && data->view->addr)
+		ft_bzero(data->view->addr, (size_t)data->view->line_len
+			* (size_t)data->view->height);
 	while (++i < WIN_WIDTH)
 	{
-		ray_angle = data->player->facing - (data->view->actual_fov / 2) + i * (data->view->actual_fov / WIN_WIDTH);
+		ray_angle = data->player->facing - (data->view->actual_fov / 2) + i
+			* (data->view->actual_fov / WIN_WIDTH);
 		ray_dir_x = cos(ray_angle);
 		ray_dir_y = sin(ray_angle);
 		ray_pos_x = data->player->x_pos;
@@ -151,7 +173,9 @@ void	c3_rycst_main(t_data *data)
 				ray_pos_y += step_y;
 				dist_y += delta_dist_y;
 			}
-			if (data->map->map[ray_pos_y][ray_pos_x] == 1 || (data->map->map[ray_pos_y][ray_pos_x] == DOOR && !player_close_to_door(data)))
+			if (data->map->map[ray_pos_y][ray_pos_x] == 1
+				|| (data->map->map[ray_pos_y][ray_pos_x] == DOOR
+					&& !player_close_to_door(data)))
 			{
 				angle_a = fabs(ray_angle - data->player->facing);
 				if (angle_a > data->view->actual_fov / 2)
