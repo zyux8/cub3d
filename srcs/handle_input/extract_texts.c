@@ -6,25 +6,13 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 17:09:56 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 23:31:19 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/19 00:24:57 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_texture(char **lines, char *sig)
-{
-	int	x;
-
-	x = 0;
-	while (lines[x] && ft_strnstr(lines[x], sig, ft_strlen(lines[x])) == NULL)
-		x++;
-	if (lines[x] && ft_strnstr(lines[x], ".xpm", ft_strlen(lines[x])) != NULL)
-		return (1);
-	return (0);
-}
-
-int	get_floor(t_data *data, char **lines)
+int	extract_floor(t_data *data, char **lines)
 {
 	int		fc;
 	char	*p_f;
@@ -53,7 +41,7 @@ int	get_floor(t_data *data, char **lines)
 	return (1);
 }
 
-int	get_ceiling(t_data *data, char **lines)
+int	extract_ceiling(t_data *data, char **lines)
 {
 	int		cc;
 	char	*p_c;
@@ -75,11 +63,8 @@ int	get_ceiling(t_data *data, char **lines)
 				0);
 		data->map->tex_ceiling = get_texture(data, p_c);
 		if (!data->map->tex_ceiling)
-		{
-			free(p_c);
-			printf("extract_colors: failed to load ceiling texture\n");
-			return (0);
-		}
+			return (free(p_c),
+				printf("extract_colors: failed to load floor texture\n"), 0);
 		free(p_c);
 	}
 	return (1);
@@ -117,11 +102,40 @@ int	extract_colors(t_data *data, char **lines)
 {
 	if (!data || !lines)
 		return (0);
-	if (!get_floor(data, lines))
+	if (!extract_floor(data, lines))
 		return (0);
-	if (!get_ceiling(data, lines))
+	if (!extract_ceiling(data, lines))
 		return (0);
 	if (is_texture(lines, "DO"))
 		extract_bonus(data, lines);
+	return (1);
+}
+
+int	extract_textures(t_data *data, char **lines)
+{
+	char	*p_no;
+	char	*p_so;
+	char	*p_we;
+	char	*p_ea;
+
+	init_map(data);
+	p_no = get_single_text_path(lines, "NO");
+	p_so = get_single_text_path(lines, "SO");
+	p_we = get_single_text_path(lines, "WE");
+	p_ea = get_single_text_path(lines, "EA");
+	if (!p_no || !p_so || !p_we || !p_ea)
+		return (free_paths(p_no, p_so, p_we, p_ea),
+			printf("extract_textures: missing texture path(s)\n"), 0);
+	if (!data->mlx)
+		return (free_paths(p_no, p_so, p_we, p_ea),
+			printf("extract_textures: data->mlx is NULL\n"), 0);
+	data->map->tex_north = get_texture(data, p_no);
+	data->map->tex_south = get_texture(data, p_so);
+	data->map->tex_west = get_texture(data, p_we);
+	data->map->tex_east = get_texture(data, p_ea);
+	if (!data->map->tex_north || !data->map->tex_south || !data->map->tex_west
+		|| !data->map->tex_east)
+		return (free_paths(p_no, p_so, p_we, p_ea), 0);
+	free_paths(p_no, p_so, p_we, p_ea);
 	return (1);
 }

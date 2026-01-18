@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:12:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 22:37:02 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/19 00:25:31 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,30 +98,6 @@ int	check_player(t_map *map)
 	return (1);
 }
 
-int	valid_none(t_map *map, int x, int y)
-{
-	int	**tmap;
-
-	if (!map || !map->map)
-		return (0);
-	tmap = map->map;
-	if (x < 0 || x > map->map_height || y < 0 || y > map->map_width)
-		return (0);
-	if (y - 1 >= 0 && (tmap[x][y - 1] == GROUND || (tmap[x][y - 1] >= PLAYER_N
-		&& tmap[x][y - 1] <= PLAYER_W)))
-		return (0);
-	if (y + 1 < map->map_width && (tmap[x][y + 1] == GROUND
-		|| (tmap[x][y + 1] >= PLAYER_N && tmap[x][y + 1] <= PLAYER_W)))
-		return (0);
-	if (x - 1 >= 0 && (tmap[x - 1][y] == GROUND || (tmap[x - 1][y] >= PLAYER_N
-		&& tmap[x - 1][y] <= PLAYER_W)))
-		return (0);
-	if (x + 1 < map->map_height && (tmap[x + 1][y] == GROUND
-		|| (tmap[x + 1][y] >= PLAYER_N && tmap[x + 1][y] <= PLAYER_W)))
-		return (0);
-	return (1);
-}
-
 int	check_nones(t_map *map)
 {
 	int	x;
@@ -143,5 +119,25 @@ int	check_nones(t_map *map)
 		x++;
 	}
 	printf("NONEs valid\n");
+	return (1);
+}
+
+int	check_door(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < data->map->map_width)
+	{
+		y = 0;
+		while (y < data->map->map_height)
+		{
+			if (data->map->map[y][x] == DOOR && !data->map->tex_door)
+				return (printf("Provide door texture\n"), 0);
+			y++;
+		}
+		x++;
+	}
 	return (1);
 }

@@ -6,11 +6,59 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:03:30 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 22:24:42 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/19 00:24:17 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	valid_none(t_map *map, int x, int y)
+{
+	int	**tmap;
+
+	if (!map || !map->map)
+		return (0);
+	tmap = map->map;
+	if (x < 0 || x > map->map_height || y < 0 || y > map->map_width)
+		return (0);
+	if (y - 1 >= 0 && (tmap[x][y - 1] == GROUND || (tmap[x][y - 1] >= PLAYER_N
+		&& tmap[x][y - 1] <= PLAYER_W)))
+		return (0);
+	if (y + 1 < map->map_width && (tmap[x][y + 1] == GROUND
+		|| (tmap[x][y + 1] >= PLAYER_N && tmap[x][y + 1] <= PLAYER_W)))
+		return (0);
+	if (x - 1 >= 0 && (tmap[x - 1][y] == GROUND || (tmap[x - 1][y] >= PLAYER_N
+		&& tmap[x - 1][y] <= PLAYER_W)))
+		return (0);
+	if (x + 1 < map->map_height && (tmap[x + 1][y] == GROUND
+		|| (tmap[x + 1][y] >= PLAYER_N && tmap[x + 1][y] <= PLAYER_W)))
+		return (0);
+	return (1);
+}
+
+void	malloc_map(int ***map, int height, int width)
+{
+	int	x;
+
+	*map = ft_calloc((size_t)height + 1, sizeof(int *));
+	if (!*map)
+		return ;
+	x = 0;
+	while (x < height)
+	{
+		(*map)[x] = ft_calloc((size_t)width + 1, sizeof(int));
+		if (!(*map)[x])
+		{
+			while (--x >= 0)
+				free((*map)[x]);
+			free(*map);
+			*map = NULL;
+			return ;
+		}
+		x++;
+	}
+	(*map)[height] = NULL;
+}
 
 int	count_lines(const char *filename)
 {
@@ -60,42 +108,24 @@ char	**malloc_lines(const char *filename)
 	return (lines);
 }
 
-void	free_paths(char *p_no, char *p_so, char *p_we, char *p_ea)
+int	start_of_map(char **lines)
 {
-	if (p_no)
-		free(p_no);
-	if (p_so)
-		free(p_so);
-	if (p_we)
-		free(p_we);
-	if (p_ea)
-		free(p_ea);
-}
+	int	x;
 
-int	is_map_char(char c)
-{
-	return (c == ' ' || c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E'
-		|| c == 'W' || c == 'D');
-}
-
-t_img	*get_texture(t_data *data, char *path)
-{
-	t_img	*texture;
-
-	if (!data || !path)
-		return (NULL);
-	texture = ft_calloc(1, sizeof(t_img));
-	if (!texture)
-		return (NULL);
-	texture->img = mlx_xpm_file_to_image(data->mlx, path, &texture->width,
-			&texture->height);
-	if (!texture->img)
+	x = 0;
+	while (lines[x])
 	{
-		free(texture);
-		printf("get_texture: failed to load image '%s'\n", path);
-		return (NULL);
+		if (ft_is_empty_or_whitespace(lines[x]))
+		{
+			x++;
+			continue ;
+		}
+		if (ft_isconfig(lines[x]))
+		{
+			x++;
+			continue ;
+		}
+		return (x);
 	}
-	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
-			&texture->line_len, &texture->endian);
-	return (texture);
+	return (0);
 }

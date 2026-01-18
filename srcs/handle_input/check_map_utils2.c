@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   more_more_more_utils.c                             :+:      :+:    :+:   */
+/*   check_map_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/14 21:31:48 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 21:53:48 by ohaker           ###   ########.fr       */
+/*   Created: 2026/01/19 00:16:45 by ohaker            #+#    #+#             */
+/*   Updated: 2026/01/19 00:17:41 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,61 +36,38 @@ int	ft_is_empty_or_whitespace(char *line)
 	return (1);
 }
 
-int	start_of_map(char **lines)
+t_playerpos	*init_player(int x, int y, int dir)
 {
-	int	x;
+	t_playerpos	*player;
+	double		angle;
 
-	x = 0;
-	while (lines[x])
-	{
-		if (ft_is_empty_or_whitespace(lines[x]))
-		{
-			x++;
-			continue ;
-		}
-		if (ft_isconfig(lines[x]))
-		{
-			x++;
-			continue ;
-		}
-		return (x);
-	}
-	return (0);
+	player = malloc(sizeof(t_playerpos));
+	if (!player)
+		return (NULL);
+	player->x_pos = x + 0.5;
+	player->y_pos = y + 0.5;
+	if (dir == PLAYER_N)
+		angle = 3.0 * PI / 2.0;
+	else if (dir == PLAYER_S)
+		angle = PI / 2.0;
+	else if (dir == PLAYER_E)
+		angle = 0.0;
+	else if (dir == PLAYER_W)
+		angle = PI;
+	else
+		angle = 0.0;
+	player->facing = angle;
+	return (player);
 }
 
-void	assign_pos(int *c, char sig)
+void	free_paths(char *p_no, char *p_so, char *p_we, char *p_ea)
 {
-	if (sig == ' ')
-		*c = NONE;
-	else if (sig == '0')
-		*c = GROUND;
-	else if (sig == '1')
-		*c = WALL;
-	else if (sig == 'N')
-		*c = PLAYER_N;
-	else if (sig == 'S')
-		*c = PLAYER_S;
-	else if (sig == 'E')
-		*c = PLAYER_E;
-	else if (sig == 'W')
-		*c = PLAYER_W;
-	else if (sig == 'D')
-		*c = DOOR;
-	else if (sig == 'P')
-		*c = SPRITE;
-}
-
-void	copy_col(char *line, int *row, int width)
-{
-	int	x;
-
-	x = 0;
-	while (line[x] && line[x] != '\n')
-	{
-		assign_pos(&row[x], line[x]);
-		x++;
-	}
-	while (x < width)
-		row[x++] = NONE;
-	row[x] = '\0';
+	if (p_no)
+		free(p_no);
+	if (p_so)
+		free(p_so);
+	if (p_we)
+		free(p_we);
+	if (p_ea)
+		free(p_ea);
 }
