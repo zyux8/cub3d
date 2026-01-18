@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:42:20 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/14 19:42:50 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/14 21:21:29 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ void	draw_line(t_data *data, int pixel_col, float dist)
 	{
 		if (!(pixel_col >= 20 && pixel_col < 20 + MINIMAP_W) || !(i >= 20
 				&& i < 20 + MINIMAP_H))
-			my_pixel_put(data->view, pixel_col, i, c3_rycst_shade(create_rgb(20,
-						20, 200), dist));
+			my_pixel_put(data->view, pixel_col, i, c3_rycst_shade(create_rgb(200,
+						20, 20), dist));
 		i++;
 	}
 }

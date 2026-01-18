@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:12:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 19:19:54 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/14 21:16:37 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ int	check_cols(t_map *map)
 		while (x < map->map_height && map_temp[x][y] == NONE)
 			x++;
 		if (x >= map->map_height || map_temp[x][y] != WALL)
-			return (printf("cols invalid\n"), 0);
+			return (printf("cols invalid at x: '%d', y: '%d'\n", x, y), 0);
 		x = map->map_height - 1;
 		while (x >= 0 && map_temp[x][y] == NONE)
 			x--;
 		if (x < 0 || map_temp[x][y] != WALL)
-			return (printf("cols invalid\n"), 0);
+			return (printf("cols invalid at x: '%d', y: '%d'\n", x, y), 0);
 		y++;
 	}
 	printf("cols valid\n");
