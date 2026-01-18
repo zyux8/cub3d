@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_even_more.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:47:58 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 22:59:47 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/18 23:27:53 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,26 @@ void	malloc_map(int ***map, int height, int width)
 	(*map)[height] = NULL;
 }
 
+int	valid_colors(char **rgb)
+{
+	if (ft_atoi(rgb[0]) > 255 || ft_atoi(rgb[0]) < 0 || ft_strlen(rgb[0]) > 3)
+		return (0);
+	if (ft_atoi(rgb[1]) > 255 || ft_atoi(rgb[1]) < 0 || ft_strlen(rgb[1]) > 3)
+		return (0);
+	if (ft_atoi(rgb[2]) > 255 || ft_atoi(rgb[2]) < 0 || ft_strlen(rgb[2]) > 3)
+		return (0);
+	return (1);
+}
+
 int	get_color(char **lines, char *sig)
 {
 	int		x;
 	char	*line;
 	char	*line2;
-	int		rgb;
 	char	**rgb_char;
+	int		rgb;
 
 	x = 0;
-	rgb_char = NULL;
 	while (lines[x] && ft_strnstr(lines[x], sig, ft_strlen(lines[x])) == NULL)
 		x++;
 	line = ft_strnstr(lines[x], sig, ft_strlen(lines[x]));
@@ -81,7 +91,7 @@ int	get_color(char **lines, char *sig)
 		rgb_char = ft_split((const char *)line2, ',');
 		free(line2);
 	}
-	if (!rgb_char)
+	if (!rgb_char || !valid_colors(rgb_char))
 		return (0);
 	rgb = create_rgb(ft_atoi(rgb_char[0]), ft_atoi(rgb_char[1]),
 			ft_atoi(rgb_char[2]));

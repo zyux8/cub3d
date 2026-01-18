@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 19:59:48 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/18 23:51:12 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,9 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
-# define SP 32
+# define KEY_SP 32
 # define KEY_Z 122
 # define MOUSE_SENSITIVITY 0.0005
-
-void	print_map(t_data *data);
 
 // srcs/input_handler.c
 int		handle_destroy(t_data *data);

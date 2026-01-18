@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 21:57:19 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 16:03:43 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/18 23:13:05 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ int		extract_colors(t_data *data, char **lines);
 void	copy_col(char *line, int *row, int width);
 
 // srcs/handle_input/validate_map.c
-int		map_valid(t_map *map);
+int		map_valid(t_data *data);
 
 #endif

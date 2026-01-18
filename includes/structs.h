@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:06:01 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 21:41:09 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/18 23:49:25 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_keys
 	int						key_do;
 	int						key_ri;
 	int						key_le;
-	int						space;
+	int						key_sp;
 	int						key_z;
 }							t_keys;
 

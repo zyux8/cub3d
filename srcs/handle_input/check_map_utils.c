@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:03:30 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 16:49:37 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/18 22:24:42 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	free_paths(char *p_no, char *p_so, char *p_we, char *p_ea)
 int	is_map_char(char c)
 {
 	return (c == ' ' || c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E'
-		|| c == 'W' || c == 'D' || c == 'P');
+		|| c == 'W' || c == 'D');
 }
 
 t_img	*get_texture(t_data *data, char *path)

@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 21:54:00 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/18 23:45:36 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,9 @@ int	extract_textures(t_data *data, char **lines)
 	data->map->tex_south = get_texture(data, p_so);
 	data->map->tex_west = get_texture(data, p_we);
 	data->map->tex_east = get_texture(data, p_ea);
-	if (!data->map->tex_north || !data->map->tex_south || 
-		!data->map->tex_west || !data->map->tex_east)
-	{
-		free_paths(p_no, p_so, p_we, p_ea);
-		printf("extract_textures: failed to load one or more textures\n");
-		return (0);
-	}
+	if (!data->map->tex_north || !data->map->tex_south || !data->map->tex_west
+		|| !data->map->tex_east)
+		return (free_paths(p_no, p_so, p_we, p_ea), 0);
 	free_paths(p_no, p_so, p_we, p_ea);
 	return (1);
 }
@@ -67,15 +63,37 @@ int	extract_map(t_data *data, char **lines)
 	return (1);
 }
 
-int	map_valid(t_map *map)
+int	check_door(t_data *data)
 {
-	if (!check_rows(map))
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < data->map->map_width)
+	{
+		y = 0;
+		while (y < data->map->map_height)
+		{
+			if (data->map->map[y][x] == DOOR && !data->map->tex_door)
+				return (printf("Provide door texture\n"), 0);
+			y++;
+		}
+		x++;
+	}
+	return (1);
+}
+
+int	map_valid(t_data *data)
+{
+	if (!check_door(data))
 		return (0);
-	if (!check_cols(map))
+	if (!check_rows(data->map))
 		return (0);
-	if (!check_player(map))
+	if (!check_cols(data->map))
 		return (0);
-	if (!check_nones(map))
+	if (!check_player(data->map))
+		return (0);
+	if (!check_nones(data->map))
 		return (0);
 	return (1);
 }
@@ -103,7 +121,7 @@ int	check_map(int ac, char **av, t_data *data)
 	while (lines[x])
 		free(lines[x++]);
 	free(lines);
-	if (!map_valid(data->map))
+	if (!map_valid(data))
 		return (0);
 	get_player_pos(data);
 	return (1);

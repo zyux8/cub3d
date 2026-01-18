@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 17:09:56 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 21:52:15 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/18 23:31:19 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	get_floor(t_data *data, char **lines)
 			return (printf("extract_colors: one or more colors not found\n"),
 				0);
 		data->map->floor_color = fc;
+		data->map->tex_floor = NULL;
 	}
 	else if (is_texture(lines, "F "))
 	{
@@ -45,11 +46,8 @@ int	get_floor(t_data *data, char **lines)
 				0);
 		data->map->tex_floor = get_texture(data, p_f);
 		if (!data->map->tex_floor)
-		{
-			free(p_f);
-			printf("extract_colors: failed to load floor texture\n");
-			return (0);
-		}
+			return (free(p_f),
+				printf("extract_colors: failed to load floor texture\n"), 0);
 		free(p_f);
 	}
 	return (1);
@@ -67,6 +65,7 @@ int	get_ceiling(t_data *data, char **lines)
 			return (printf("extract_colors: one or more colors not found\n"),
 				0);
 		data->map->ceiling_color = cc;
+		data->map->tex_ceiling = NULL;
 	}
 	else if (is_texture(lines, "C "))
 	{
@@ -106,9 +105,10 @@ int	extract_bonus(t_data *data, char **lines)
 			return (0);
 		}
 	}
+	else
+		data->map->tex_door = NULL;
 	if (!data->mlx)
-		return (free(p_do),
-			printf("extract_textures: data->mlx is NULL\n"), 0);
+		return (free(p_do), printf("extract_textures: data->mlx is NULL\n"), 0);
 	free(p_do);
 	return (1);
 }
