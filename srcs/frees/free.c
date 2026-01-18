@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free1.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:27:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 16:33:52 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/18 21:41:51 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	free_map_texts(t_map *map, void *mlx)
 		free_img(map->tex_ceiling, mlx);
 	if (map->tex_door)
 		free_img(map->tex_door, mlx);
-	if (map->tex_sprite)
-		free_img(map->tex_sprite, mlx);
 }
 
 void	free_map(t_map *map, void *mlx)

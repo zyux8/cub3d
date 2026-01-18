@@ -6,34 +6,41 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 19:47:58 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/18 22:16:55 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_data(t_data *data)
+int	init_view(t_data *data)
 {
-	if (!data)
-		exit(1);
-	data->mlx = mlx_init();
-	if (!data->mlx)
-		exit(1);
-	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
 	data->view = ft_calloc(1, sizeof(t_img));
-	data->minimap = ft_calloc(1, sizeof(t_minimap));
-	if (!data->view || !data->minimap)
-		exit(1);
+	if (!data->view)
+		return (0);
 	data->view->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->view->addr = mlx_get_data_addr(data->view->img,
 			&data->view->bits_per_pixel, &data->view->line_len,
 			&data->view->endian);
 	data->view->width = WIN_WIDTH;
 	data->view->height = WIN_HEIGHT;
+	data->view->actual_fov = FOV * (PI / 180);
+	return (1);
+}
+
+void	init_data(t_data *data)
+{
+	if (!data)
+		exit(1);
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
+	if (!init_view(data) || !data->mlx)
+		exit(1);
+	data->minimap = ft_calloc(1, sizeof(t_minimap));
+	if (!data->minimap)
+		exit(1);
 	init_minimap(data);
 	data->player = NULL;
 	data->keys = init_key_struct();
-	data->view->actual_fov = FOV * (PI / 180);
 	data->cigar = init_cigar(data);
 	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	mlx_mouse_hide(data->mlx, data->win);
@@ -55,6 +62,7 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
+	ft_bzero(&data, sizeof(t_data));
 	if (!check_map(ac, av, &data))
 		return (cleanup_and_exit(&data), 1);
 	mlx_loop_hook(data.mlx, render_everything, &data);

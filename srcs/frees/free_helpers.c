@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:30:00 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/19 17:16:13 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/18 21:51:54 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	free_img(t_img *img, void *mlx)
 	if (!img)
 		return ;
 	if (img->img && mlx)
+	{
 		mlx_destroy_image(mlx, img->img);
+		img->img = NULL;
+	}
 	free(img);
 }
 

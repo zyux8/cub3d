@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:06:01 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 16:11:53 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/18 21:41:09 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct s_map
 	t_img					*tex_floor;
 	t_img					*tex_ceiling;
 	t_img					*tex_door;
-	t_img					*tex_sprite;
 	int						ceiling_color;
 	int						floor_color;
 	int						**map;

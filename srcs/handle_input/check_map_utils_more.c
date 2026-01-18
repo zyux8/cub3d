@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:40:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/22 19:17:05 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/18 21:41:45 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	init_map(t_data *data)
 	map->tex_west = NULL;
 	map->tex_east = NULL;
 	map->tex_door = NULL;
-	map->tex_sprite = NULL;
 	map->tex_ceiling = NULL;
 	map->tex_floor = NULL;
 	map->map = NULL;

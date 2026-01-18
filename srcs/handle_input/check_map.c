@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/22 21:46:56 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/18 21:54:00 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ int	extract_textures(t_data *data, char **lines)
 	data->map->tex_south = get_texture(data, p_so);
 	data->map->tex_west = get_texture(data, p_we);
 	data->map->tex_east = get_texture(data, p_ea);
+	if (!data->map->tex_north || !data->map->tex_south || 
+		!data->map->tex_west || !data->map->tex_east)
+	{
+		free_paths(p_no, p_so, p_we, p_ea);
+		printf("extract_textures: failed to load one or more textures\n");
+		return (0);
+	}
 	free_paths(p_no, p_so, p_we, p_ea);
 	return (1);
 }
@@ -77,9 +84,14 @@ int	check_map(int ac, char **av, t_data *data)
 {
 	char	**lines;
 	int		x;
+	int		fd;
 
 	if (ac < 2 || !ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
 		return (printf("Usage: './cub3d' <map.cub>\n"), 0);
+	fd = open(av[1], R_OK);
+	if (fd <= 0)
+		return (printf("File couldnt be opened/found\n"), close(fd), 0);
+	close(fd);
 	init_data(data);
 	lines = malloc_lines((const char *)av[1]);
 	if (!lines)

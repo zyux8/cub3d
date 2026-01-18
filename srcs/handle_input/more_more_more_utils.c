@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:31:48 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/13 21:14:57 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/18 21:53:48 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	ft_isconfig(char *line)
 		line++;
 	if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
 		|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2)
-		|| !ft_strncmp(line, "DO", 2) || !ft_strncmp(line, "SP", 2)
-		|| *line == 'F' || *line == 'C')
+		|| !ft_strncmp(line, "DO", 2) || *line == 'F' || *line == 'C')
 		return (1);
 	return (0);
 }
