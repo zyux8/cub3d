@@ -6,20 +6,17 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 23:51:12 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/19 19:45:57 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "structs.h"
-
 # include "../srcs/draw_minimap/draw_minimap.h"
 # include "../srcs/frees/free.h"
 # include "../srcs/handle_input/input.h"
 # include "../srcs/raycasting/cub3d_raycast.h"
-
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include "structs.h"
@@ -71,8 +68,12 @@ t_keys	*init_key_struct(void);
 void	update_player_pos(t_data *data);
 void	move_player(t_data *data, double move_x, double move_y);
 
-// overlay/overlay.c
-int		load_cigar(t_data *data);
+// overlay/overlay_cigar.c
 t_cigar	*init_cigar(t_data *data);
+int		get_pixel_color(t_img *img, int x, int y);
+int		load_cigar(t_data *data);
+
+// overlay/overlay_cigar.c
+int	init_smoke(t_data *data);
 
 #endif

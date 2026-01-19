@@ -6,7 +6,7 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/19 00:27:15 by ohaker           ###   ########.fr        #
+#    Updated: 2026/01/19 19:39:53 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,10 @@ SRC = $(addprefix srcs/, \
 	) \
 	$(addprefix raycasting/, \
 	cub3d_raycast_main.c \
+	) \
+	$(addprefix overlay/, \
+	overlay_cigar.c \
+	overlay_smoke.c \
 	) \
 	overlay/overlay.c \
 	input_handler.c \
