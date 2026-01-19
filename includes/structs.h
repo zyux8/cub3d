@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:06:01 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 23:49:25 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/19 19:50:35 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_img
 	int						bits_per_pixel;
 	int						line_len;
 	int						endian;
-	float					actual_fov;
 }							t_img;
 
 typedef struct s_data
@@ -88,6 +87,7 @@ typedef struct s_map
 	int						map_height;
 	int						map_width;
 	enum e_map_info			player_facing;
+	float					actual_fov;
 }							t_map;
 
 typedef struct s_minimap

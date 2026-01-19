@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 23:51:12 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/19 19:50:29 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	update_player_pos(t_data *data);
 void	move_player(t_data *data, double move_x, double move_y);
 
 // overlay/overlay.c
+int		get_pixel_color(t_img *img, int x, int y);
 int		load_cigar(t_data *data);
 t_cigar	*init_cigar(t_data *data);
 
