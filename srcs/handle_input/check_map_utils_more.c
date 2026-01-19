@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils_more.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 21:40:36 by ohaker            #+#    #+#             */
-/*   Updated: 2025/12/22 19:17:05 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/15 20:35:12 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_map(t_data *data)
 	map->ceiling_color = -1;
 	map->floor_color = -1;
 	map->player_facing = NONE;
+	map->actual_fov = FOV * (PI / 180);
 	data->map = map;
 }
 

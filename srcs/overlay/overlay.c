@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   overlay.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:43:31 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 19:15:49 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/15 21:17:52 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_cigar	*init_cigar(t_data *data)
 	return (close(fd1), close(fd2), cigar);
 }
 
-static int	get_pixel_color(t_img *img, int x, int y)
+int	get_pixel_color(t_img *img, int x, int y)
 {
 	char	*dst;
 

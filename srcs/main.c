@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 19:47:58 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/15 20:55:03 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	init_data(t_data *data)
 	init_minimap(data);
 	data->player = NULL;
 	data->keys = init_key_struct();
-	data->view->actual_fov = FOV * (PI / 180);
 	data->cigar = init_cigar(data);
 	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	mlx_mouse_hide(data->mlx, data->win);
