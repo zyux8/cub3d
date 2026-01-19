@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 19:50:40 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/19 21:02:12 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	init_view(t_data *data)
 			&data->view->endian);
 	data->view->width = WIN_WIDTH;
 	data->view->height = WIN_HEIGHT;
-	data->view->actual_fov = FOV * (PI / 180);
 	return (1);
 }
 
