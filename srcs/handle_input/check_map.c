@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 00:26:00 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/19 21:11:00 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_map(t_data *data)
 	map->ceiling_color = -1;
 	map->floor_color = -1;
 	map->player_facing = NONE;
+	map->actual_fov = FOV * (PI / 180);
 	data->map = map;
 }
 

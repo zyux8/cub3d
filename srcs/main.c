@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 22:16:55 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/19 21:05:22 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	init_view(t_data *data)
 			&data->view->endian);
 	data->view->width = WIN_WIDTH;
 	data->view->height = WIN_HEIGHT;
-	data->view->actual_fov = FOV * (PI / 180);
 	return (1);
 }
 
