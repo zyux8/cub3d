@@ -6,60 +6,81 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 00:26:00 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/18 23:45:36 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_map(t_data *data)
+int	extract_textures(t_data *data, char **lines)
 {
-	t_map	*map;
+	char	*p_no;
+	char	*p_so;
+	char	*p_we;
+	char	*p_ea;
 
-	data->map = NULL;
-	map = malloc(sizeof(t_map));
-	if (!map)
-		return ;
-	map->tex_north = NULL;
-	map->tex_south = NULL;
-	map->tex_west = NULL;
-	map->tex_east = NULL;
-	map->tex_door = NULL;
-	map->tex_ceiling = NULL;
-	map->tex_floor = NULL;
-	map->map = NULL;
-	map->map_height = 0;
-	map->map_width = 0;
-	map->ceiling_color = -1;
-	map->floor_color = -1;
-	map->player_facing = NONE;
-	data->map = map;
+	if (!data || !lines)
+		return (0);
+	init_map(data);
+	p_no = get_single_text_path(lines, "NO");
+	p_so = get_single_text_path(lines, "SO");
+	p_we = get_single_text_path(lines, "WE");
+	p_ea = get_single_text_path(lines, "EA");
+	if (!p_no || !p_so || !p_we || !p_ea)
+		return (free_paths(p_no, p_so, p_we, p_ea),
+			printf("extract_textures: missing texture path(s)\n"), 0);
+	if (!data->mlx)
+		return (free_paths(p_no, p_so, p_we, p_ea),
+			printf("extract_textures: data->mlx is NULL\n"), 0);
+	data->map->tex_north = get_texture(data, p_no);
+	data->map->tex_south = get_texture(data, p_so);
+	data->map->tex_west = get_texture(data, p_we);
+	data->map->tex_east = get_texture(data, p_ea);
+	if (!data->map->tex_north || !data->map->tex_south || !data->map->tex_west
+		|| !data->map->tex_east)
+		return (free_paths(p_no, p_so, p_we, p_ea), 0);
+	free_paths(p_no, p_so, p_we, p_ea);
+	return (1);
 }
 
-int	get_height(char **lines, int start)
+int	extract_map(t_data *data, char **lines)
 {
+	int	start;
+	int	**map;
 	int	x;
 
-	x = start;
-	while (lines[x])
-		x++;
-	return (x - start);
-}
-
-int	get_width(char **lines, int start)
-{
-	int	x;
-	int	width;
-
-	x = start;
-	width = 0;
-	while (lines[x])
+	start = start_of_map(lines);
+	data->map->map_height = get_height(lines, start);
+	data->map->map_width = get_width(lines, start);
+	x = 0;
+	malloc_map(&map, data->map->map_height, data->map->map_width);
+	while (x < data->map->map_height)
 	{
-		if (ft_strlen(lines[x]) > width)
-			width = ft_strlen(lines[x]);
+		copy_col(lines[start + x], map[x], data->map->map_width);
 		x++;
 	}
-	return (width - 1);
+	data->map->map = map;
+	return (1);
+}
+
+int	check_door(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < data->map->map_width)
+	{
+		y = 0;
+		while (y < data->map->map_height)
+		{
+			if (data->map->map[y][x] == DOOR && !data->map->tex_door)
+				return (printf("Provide door texture\n"), 0);
+			y++;
+		}
+		x++;
+	}
+	return (1);
 }
 
 int	map_valid(t_data *data)

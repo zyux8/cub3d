@@ -6,7 +6,7 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/19 00:27:15 by ohaker           ###   ########.fr        #
+#    Updated: 2026/01/14 18:41:41 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,12 @@ SRC = $(addprefix srcs/, \
 	free.c \
 	free_helpers.c) \
 	$(addprefix handle_input/, \
+	check_map_even_more.c \
+	check_map_utils_more.c \
 	check_map_utils.c \
-	check_map_utils2.c \
 	check_map.c \
-	extract_map.c \
-	extract_texts_utils.c \
 	extract_texts.c \
+	more_more_more_utils.c \
 	validate_map.c \
 	) \
 	$(addprefix raycasting/, \

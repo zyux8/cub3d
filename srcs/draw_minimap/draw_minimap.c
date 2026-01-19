@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 02:23:41 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/18 23:54:23 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/14 19:09:57 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	draw_player(t_data *data)
 	center_y = 100;
 	draw_fov(data);
 	draw_player_dot(data, center_x, center_y);
-	draw_frame(data->minimap);
 }
 
 void	draw_minimap(t_data *data)
@@ -96,13 +95,13 @@ void	draw_minimap(t_data *data)
 	int	draw_x;
 	int	draw_y;
 
+	y = -1;
 	if (data->minimap && data->minimap->img->addr)
 		ft_bzero(data->minimap->img->addr, (size_t)data->minimap->img->line_len
 			* (size_t)data->minimap->img->height);
 	data->minimap->x_off = (data->player->x_pos * TILE_SIZE) - (MINIMAP_W / 2);
 	data->minimap->y_off = (data->player->y_pos * TILE_SIZE) - (MINIMAP_HEIGHT
 			/ 2);
-	y = -1;
 	while (++y < data->map->map_height)
 	{
 		x = -1;
@@ -115,5 +114,7 @@ void	draw_minimap(t_data *data)
 				draw_square(data, draw_x, draw_y, data->map->map[y][x]);
 		}
 	}
+	draw_frame(data->minimap);
 	draw_player(data);
+
 }

@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 23:51:41 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 19:51:06 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/19 20:44:15 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	draw_fov(t_data *data)
 
 	x = 0;
 	while (x < data->map->actual_fov)
+	// printf("1: '%f'\n2: '%f'\n", data->view->actual_fov, (FOV2 * 2));
+	while (x < data->view->actual_fov)
 	{
 		y = 0;
 		while (y < 80)
