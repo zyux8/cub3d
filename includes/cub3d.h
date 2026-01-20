@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 01:33:04 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 01:56:22 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,9 @@
 # include <sys/time.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <sys/time.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1280
+# define WIN_WIDTH 1080
 # define WIN_HEIGHT 720
 # define KEY_ESC 65307
 # define KEY_UP 65362
@@ -54,33 +53,33 @@
 # define MOUSE_SENSITIVITY 0.0005
 
 // srcs/input_handler.c
-int		handle_destroy(t_data *data);
-int		key_press(int keycode, t_data *data);
-int		key_release(int keycode, t_data *data);
-int		mouse_move(int x, int y, t_data *data);
+int			handle_destroy(t_data *data);
+int			key_press(int keycode, t_data *data);
+int			key_release(int keycode, t_data *data);
+int			mouse_move(int x, int y, t_data *data);
 
 // srcs/main.c
-void	init_data(t_data *data);
-void	cleanup_and_exit(t_data *data);
+void		init_data(t_data *data);
+void		cleanup_and_exit(t_data *data);
 
 // srcs/utils.c
-void	my_pixel_put(t_img *img, int x, int y, int color);
-int		create_rgb(int r, int g, int b);
-t_keys	*init_key_struct(void);
-void	update_player_pos(t_data *data);
-void	move_player(t_data *data, double move_x, double move_y);
+void		my_pixel_put(t_img *img, int x, int y, int color);
+int			create_rgb(int r, int g, int b);
+t_keys		*init_key_struct(void);
+void		update_player_pos(t_data *data);
+void		move_player(t_data *data, double move_x, double move_y);
 
 // overlay/overlay_cigar.c
-t_cigar	*init_cigar(t_data *data);
-int		get_pixel_color(t_img *img, int x, int y);
-void	overlay_image(t_img *dest, t_img *src, int x_off, int y_off);
-int		load_cigar(t_data *data);
+t_cigar		*init_cigar(t_data *data);
+int			get_pixel_color(t_img *img, int x, int y);
+void		overlay_image(t_img *dest, t_img *src, int x_off, int y_off);
+int			load_cigar(t_data *data);
 
 // overlay/overlay_cigar.c
-void	loop_smoke(t_data *data);
-int		init_smoke(t_data *data, t_cigar *cigar);
+void		loop_smoke(t_data *data);
+int			init_smoke(t_data *data, t_cigar *cigar);
 
 t_fps_count	*init_fps_count(void);
-void	c3_fps_count(t_data *data);
+void		c3_fps_count(t_data *data);
 
 #endif

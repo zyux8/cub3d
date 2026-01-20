@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:06:01 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 01:33:21 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 01:48:16 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ typedef struct s_keys
 	int						key_do;
 	int						key_ri;
 	int						key_le;
+	int						key_w;
+	int						key_a;
+	int						key_s;
+	int						key_d;
 	int						key_sp;
 	int						key_z;
 }							t_keys;
@@ -123,6 +127,5 @@ typedef struct s_fps_count
 	float					fps;
 	double					last_frame;
 }							t_fps_count;
-
 
 #endif
