@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 19:50:29 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/20 01:08:17 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/time.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
 # define KEY_ESC 65307
 # define KEY_UP 65362
 # define KEY_DOWN 65364
@@ -75,5 +76,8 @@ void	move_player(t_data *data, double move_x, double move_y);
 int		get_pixel_color(t_img *img, int x, int y);
 int		load_cigar(t_data *data);
 t_cigar	*init_cigar(t_data *data);
+
+t_fps_count	*init_fps_count(void);
+void	c3_fps_count(t_data *data);
 
 #endif

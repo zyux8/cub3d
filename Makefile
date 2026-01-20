@@ -6,7 +6,7 @@
 #    By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/19 21:04:27 by pbarthol         ###   ########.fr        #
+#    Updated: 2026/01/20 01:07:24 by pbarthol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRC = $(addprefix srcs/, \
 	overlay/overlay.c \
 	input_handler.c \
 	main.c \
-	utils.c)
+	utils.c \
+	utils_02.c)
 
 OBJ = $(SRC:.c=.o)
 LIBFT_DIR = includes/libft

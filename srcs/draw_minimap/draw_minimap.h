@@ -6,14 +6,13 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:08:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/14 20:01:08 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/20 01:29:51 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DRAW_MINIMAP_H
 # define DRAW_MINIMAP_H
 
-# define MINIMAP_SIZE 1000
 # define TILE_SIZE 28
 # define MINIMAP_W 200
 # define MINIMAP_H 200

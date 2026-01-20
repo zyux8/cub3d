@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:42:20 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/19 19:51:44 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/20 01:26:20 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,14 @@ unsigned int	c3_rycst_find_text_pixel(t_data *data, float i, float dist,
 	y_pixel_pos = (int)(i * texture->height);
 	if (x_pixel_pos < 0)
 		x_pixel_pos = 0;
-	if (x_pixel_pos >= texture->width)
-		x_pixel_pos = texture->width - 1;
+	// if (x_pixel_pos >= texture->width)
+	// 	x_pixel_pos = texture->width - 1;
 	if (y_pixel_pos < 0)
 		y_pixel_pos = 0;
-	if (y_pixel_pos >= texture->height)
-		y_pixel_pos = texture->height - 1;
-	return (get_pixel_color(texture, x_pixel_pos, y_pixel_pos));
+	// if (y_pixel_pos >= texture->height)
+	// 	y_pixel_pos = texture->height - 1;
+	return (c3_rycst_shade(get_pixel_color(texture, x_pixel_pos, y_pixel_pos),
+		dist));
 }
 
 /**
@@ -113,9 +114,9 @@ void	draw_line(t_data *data, int pixel_col, float dist, float ray_angle, int hit
 	int	start;
 	int	end;
 
-	if (dist < 1)
-		line_height = WIN_HEIGHT;
-	else
+	// if (dist < 1)
+	// 	line_height = WIN_HEIGHT;
+	// else
 		line_height = WIN_HEIGHT / dist;
 	i = 0;
 	while (i < WIN_HEIGHT / 2)
@@ -132,16 +133,18 @@ void	draw_line(t_data *data, int pixel_col, float dist, float ray_angle, int hit
 	}
 	start = (WIN_HEIGHT / 2) - (line_height / 2);
 	end = start + line_height;
-	if (start < 0)
-		start = 0;
-	if (end > WIN_HEIGHT)
-		end = WIN_HEIGHT;
+	// if (start < 0)
+	// 	start = 0;
+	// if (end > WIN_HEIGHT)
+	// 	end = WIN_HEIGHT;
 	i = start;
 	while (i < end)
 	{
 		if (!(pixel_col >= 20 && pixel_col < 20 + MINIMAP_W) || !(i >= 20
 				&& i < 20 + MINIMAP_H))
-			my_pixel_put(data->view, pixel_col, i, c3_rycst_shade(c3_rycst_find_text_pixel(data, (i - start) / line_height, dist, ray_angle, hit_vertical), dist));
+			my_pixel_put(data->view, pixel_col, i, c3_rycst_find_text_pixel
+				(data, (float)(i - start) / line_height, dist, ray_angle,
+					hit_vertical));
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:04:16 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 21:05:22 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/20 01:23:19 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	init_data(t_data *data)
 	data->player = NULL;
 	data->keys = init_key_struct();
 	data->cigar = init_cigar(data);
+	data->fps_count = init_fps_count();
 	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	mlx_mouse_hide(data->mlx, data->win);
 }
@@ -54,6 +55,7 @@ int	render_everything(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->view->img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img->img, 20,
 		20);
+	c3_fps_count(data);
 	return (0);
 }
 
