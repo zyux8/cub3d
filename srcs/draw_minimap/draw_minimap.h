@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:08:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 18:33:39 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 18:35:39 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define MINIMAP_H 200
 # define MOVE_SPEED 0.12
 # define ROT_SPEED 0.07
-# define PI 3.141592653589793238462643383279502881971
+# define PI 3.1415926535897932384626433832795028841971
 
 // srcs/draw_minimap/draw_minimap.c
 void	init_minimap(t_data *data);
