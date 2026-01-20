@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 18:32:37 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 21:53:32 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1080
+# define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 # define KEY_ESC 65307
 # define KEY_UP 65362

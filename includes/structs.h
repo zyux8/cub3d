@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:06:01 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 18:22:14 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/20 19:51:32 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,18 @@ typedef struct s_raycast
 	float					ray_angle;
 	float					dist;
 	int						hit_vertical;
+	int						ray_pos_x;
+	int						ray_pos_y;
+	int						step_x;
+	int						step_y;
+	float					initial_x;
+	float					initial_y;
+	float					ray_dir_x;
+	float					ray_dir_y;
+	float					delta_dist_x;
+	float					delta_dist_y;
+	float					dist_x;
+	float					dist_y;
 }							t_raycast;
 
 
