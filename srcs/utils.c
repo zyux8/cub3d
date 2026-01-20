@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:34:48 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 02:03:02 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 18:32:42 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,17 @@ t_keys	*init_key_struct(void)
 void	update_player_pos(t_data *data)
 {
 	if (data->keys->key_sp)
-	{
-		if (data->keys->key_up || data->keys->key_w)
-			move_player(data, cos(data->player->facing) * (MOVE_SPEED + 0.1),
-				sin(data->player->facing) * (MOVE_SPEED + 0.1));
-		if (data->keys->key_do || data->keys->key_s)
-			move_player(data, -cos(data->player->facing) * (MOVE_SPEED + 0.1),
-				-sin(data->player->facing) * (MOVE_SPEED + 0.1));
-	}
+		update_player_movement(data, MOVE_SPEED + 0.1);
 	else if (!data->keys->key_sp)
-	{
-		if (data->keys->key_up || data->keys->key_w)
-			move_player(data, cos(data->player->facing) * MOVE_SPEED,
-				sin(data->player->facing) * MOVE_SPEED);
-		if (data->keys->key_do || data->keys->key_s)
-			move_player(data, -cos(data->player->facing) * MOVE_SPEED,
-				-sin(data->player->facing) * MOVE_SPEED);
-	}
+		update_player_movement(data, MOVE_SPEED);
 	if (data->keys->key_d)
-		move_player(data, cos(data->player->facing + (PI / 2)) * (MOVE_SPEED / 1.8),
-			sin(data->player->facing + (PI / 2)) * (MOVE_SPEED / 1.8));
+		move_player(data, cos(data->player->facing + (PI / 2)) * (MOVE_SPEED
+				/ 1.8), sin(data->player->facing + (PI / 2)) * (MOVE_SPEED
+				/ 1.8));
 	if (data->keys->key_a)
-		move_player(data, -cos(data->player->facing + (PI / 2)) * (MOVE_SPEED / 1.8),
-			-sin(data->player->facing + (PI / 2)) * (MOVE_SPEED / 1.8));
+		move_player(data, -cos(data->player->facing + (PI / 2)) * (MOVE_SPEED
+				/ 1.8), -sin(data->player->facing + (PI / 2)) * (MOVE_SPEED
+				/ 1.8));
 	if (data->keys->key_le)
 		data->player->facing -= ROT_SPEED;
 	if (data->keys->key_ri)

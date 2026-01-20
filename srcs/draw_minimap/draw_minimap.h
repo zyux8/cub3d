@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:08:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 01:33:31 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 18:28:02 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define TILE_SIZE 28
 # define MINIMAP_W 200
 # define MINIMAP_H 200
-# define MINIMAP_HEIGHT 200
+# define MINIMAP_H 200
 # define MOVE_SPEED 0.12
 # define ROT_SPEED 0.1
 # define PI 3.141592653589793238462643383279502881971

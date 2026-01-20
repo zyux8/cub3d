@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_02.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:44:35 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/20 01:25:19 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/20 18:32:45 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,14 @@ void	c3_fps_count(t_data *data)
 	fps_str = ft_itoa((int)data->fps_count->fps);
 	mlx_string_put(data->mlx, data->win, 240, 30, 0xFFFFFF, fps_str);
 	free(fps_str);
+}
+
+void	update_player_movement(t_data *data, float speed)
+{
+	if (data->keys->key_up || data->keys->key_w)
+		move_player(data, cos(data->player->facing) * speed,
+			sin(data->player->facing) * speed);
+	if (data->keys->key_do || data->keys->key_s)
+		move_player(data, -cos(data->player->facing) * speed,
+			-sin(data->player->facing) * speed);
 }
