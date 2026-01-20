@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   overlay.c                                          :+:      :+:    :+:   */
+/*   overlay_cigar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:43:31 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/15 21:17:52 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/20 00:46:52 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,19 @@ t_cigar	*init_cigar(t_data *data)
 {
 	t_cigar	*cigar;
 	int		fd1;
-	int		fd2;
 
 	cigar = malloc(sizeof(t_cigar));
 	if (!cigar)
 		return (NULL);
 	fd1 = open("maps/textures/cigarre.xpm", R_OK);
-	fd2 = open("maps/textures/smoke.xpm", R_OK);
-	if (fd1 > 0 && fd2 > 0)
-	{
-		printf("found texts\n");
+	if (fd1 > 0)
 		cigar->cigar = get_texture(data, "maps/textures/cigarre.xpm");
-		cigar->smoke = get_texture(data, "maps/textures/smoke.xpm");
-	}
 	else
-		return (close(fd1), close(fd2), NULL);
-	return (close(fd1), close(fd2), cigar);
+		return (close(fd1), NULL);
+	cigar->smoke = NULL;
+	if (!init_smoke(data, cigar))
+		return (NULL);
+	return (close(fd1), cigar);
 }
 
 int	get_pixel_color(t_img *img, int x, int y)
@@ -46,7 +43,7 @@ int	get_pixel_color(t_img *img, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-static void	overlay_image(t_img *dest, t_img *src, int x_off, int y_off)
+void	overlay_image(t_img *dest, t_img *src, int x_off, int y_off)
 {
 	int	x;
 	int	y;
@@ -77,8 +74,9 @@ int	load_cigar(t_data *data)
 	{
 		if (data->cigar->cigar != NULL && data->cigar->smoke != NULL)
 		{
-			overlay_image(data->view, data->cigar->smoke, WIN_WIDTH - (WIN_WIDTH
-					/ 2.7) + 20, WIN_HEIGHT - 900);
+			// overlay_image(data->view, data->cigar->smoke->frames[1], WIN_WIDTH - (WIN_WIDTH
+			// 		/ 2.7) + 20, WIN_HEIGHT - 900);
+			loop_smoke(data);
 			overlay_image(data->view, data->cigar->cigar, WIN_WIDTH - (WIN_WIDTH
 					/ 2.7), WIN_HEIGHT - 340);
 		}

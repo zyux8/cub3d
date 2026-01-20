@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+         #
+#    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/20 01:07:24 by pbarthol         ###   ########.fr        #
+#    Updated: 2026/01/20 01:33:01 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,13 @@ SRC = $(addprefix srcs/, \
 	extract_texts.c \
 	validate_map.c \
 	) \
- 	$(addprefix raycasting/, \
- 	cub3d_raycast_main.c \
- 	) \
-	overlay/overlay.c \
+	$(addprefix raycasting/, \
+	cub3d_raycast_main.c \
+	) \
+	$(addprefix overlay/, \
+	overlay_cigar.c \
+	overlay_smoke.c \
+	) \
 	input_handler.c \
 	main.c \
 	utils.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:06:01 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 01:05:58 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/20 01:33:21 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_keys		t_keys;
 typedef struct s_minimap	t_minimap;
 typedef struct s_cigar		t_cigar;
 typedef struct s_fps_count	t_fps_count;
+typedef struct s_data		t_data;
 
 typedef struct s_img
 {
@@ -99,10 +100,22 @@ typedef struct s_minimap
 	double					y_off;
 }							t_minimap;
 
+typedef struct s_smoke
+{
+	t_img					**frames;
+	int						frame_count;
+	int						current;
+	long					last_update;
+	long					frame_delay;
+	// int		x;
+	// int		y;
+	// int		enabled;
+}							t_smoke;
+
 typedef struct s_cigar
 {
 	t_img					*cigar;
-	t_img					*smoke;
+	t_smoke					*smoke;
 }							t_cigar;
 
 typedef struct s_fps_count
