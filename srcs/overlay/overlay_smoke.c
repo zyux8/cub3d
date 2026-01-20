@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:33:07 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 01:40:32 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 18:26:58 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,17 @@ void	loop_smoke(t_data *data)
 	current_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	if (data->cigar->smoke->last_update == 0)
 		data->cigar->smoke->last_update = current_time;
-	if (current_time - data->cigar->smoke->last_update >= data->cigar->smoke->frame_delay)
+	if (current_time
+		- data->cigar->smoke->last_update >= data->cigar->smoke->frame_delay)
 	{
-		data->cigar->smoke->current = (data->cigar->smoke->current + 1) % data->cigar->smoke->frame_count;
+		data->cigar->smoke->current = (data->cigar->smoke->current + 1)
+			% data->cigar->smoke->frame_count;
 		data->cigar->smoke->last_update = current_time;
 	}
 	overlay_image(data->view,
 		data->cigar->smoke->frames[data->cigar->smoke->current], WIN_WIDTH
-		- (WIN_WIDTH / 2.7) - 20, WIN_HEIGHT - (data->cigar->cigar->height * 1.65));
+		- (WIN_WIDTH / 2.7) - 20, WIN_HEIGHT - (data->cigar->cigar->height
+			* 1.65));
 }
 
 int	init_smoke(t_data *data, t_cigar *cigar)

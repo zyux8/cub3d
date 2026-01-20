@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 01:56:22 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 18:32:37 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ int			init_smoke(t_data *data, t_cigar *cigar);
 
 t_fps_count	*init_fps_count(void);
 void		c3_fps_count(t_data *data);
+void		update_player_movement(t_data *data, float speed);
 
 #endif
