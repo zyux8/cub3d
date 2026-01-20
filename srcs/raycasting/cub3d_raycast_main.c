@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:42:20 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/20 18:42:52 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/20 18:44:35 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	c3_rycst_draw_line(t_data *data, int pixel_col)
 		if (!(pixel_col >= 20 && pixel_col < 20 + MINIMAP_W) || !(i >= 20
 				&& i < 20 + MINIMAP_H))
 			my_pixel_put(data->view, pixel_col, i, c3_rycst_find_text_pixel
-				(data, (float)(i - clamped_start) / line_height));
+				(data, (float)(i - start) / line_height));
 		i++;
 	}
 }
