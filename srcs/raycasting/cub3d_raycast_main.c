@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:42:20 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/20 17:20:07 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 17:55:56 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,16 +106,12 @@ unsigned int	c3_rycst_shade(unsigned int color, float dist)
 void	draw_line(t_data *data, int pixel_col, float dist, float ray_angle,
 		int hit_vertical)
 {
-	int		i;
-	int		line_height;
-	int		start;
-	int		end;
-	float	angle_a;
+	int	i;
+	int	line_height;
+	int	start;
+	int	end;
 
-	angle_a = fabs(ray_angle - data->player->facing);
-	if (angle_a > data->map->actual_fov / 2)
-		angle_a -= (2 * PI);
-	line_height = WIN_HEIGHT / (dist * cos(angle_a));
+	line_height = WIN_HEIGHT / dist;
 	i = 0;
 	while (i < WIN_HEIGHT / 2)
 	{
@@ -160,6 +156,7 @@ void	c3_rycst_main(t_data *data)
 	float	dist_x;
 	float	dist_y;
 	float	dist;
+	float	angle_a;
 	int		hit_vertical;
 
 	i = -1;
@@ -220,6 +217,10 @@ void	c3_rycst_main(t_data *data)
 				|| (data->map->map[ray_pos_y][ray_pos_x] == DOOR
 					&& !player_close_to_door(data)))
 			{
+				angle_a = fabs(ray_angle - data->player->facing);
+				if (angle_a > data->map->actual_fov / 2)
+					angle_a -= (2 * PI);
+				dist *= cos(angle_a);
 				draw_line(data, i, dist, ray_angle, hit_vertical);
 				break ;
 			}
