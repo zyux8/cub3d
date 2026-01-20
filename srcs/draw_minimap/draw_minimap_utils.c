@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 23:51:41 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 20:59:17 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/20 01:02:27 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_fov(t_data *data)
 	int		y;
 
 	x = 0;
-	while (x < data->map->actual_fov)
+	while (x < FOV2 * 2)
 	{
 		y = 0;
 		while (y < 80)
