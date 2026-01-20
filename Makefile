@@ -6,7 +6,7 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/19 21:22:52 by ohaker           ###   ########.fr        #
+#    Updated: 2026/01/20 01:31:41 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRC = $(addprefix srcs/, \
 	overlay_cigar.c \
 	overlay_smoke.c \
 	) \
-	overlay/overlay.c \
 	input_handler.c \
 	main.c \
 	utils.c)

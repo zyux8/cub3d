@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:33:07 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 19:45:48 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 00:53:03 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,26 @@ int	load_smoke_texts(t_data *data, t_smoke *smoke)
 	return (close(fd1), close(fd2), close(fd3), close(fd4), 1);
 }
 
-int	init_smoke(t_data *data)
+void	loop_smoke(t_data *data)
+{
+	struct timeval	tv;
+	long			current_time;
+
+	gettimeofday(&tv, NULL);
+	current_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	if (data->cigar->smoke->last_update == 0)
+		data->cigar->smoke->last_update = current_time;
+	if (current_time - data->cigar->smoke->last_update >= data->cigar->smoke->frame_delay)
+	{
+		data->cigar->smoke->current = (data->cigar->smoke->current + 1) % data->cigar->smoke->frame_count;
+		data->cigar->smoke->last_update = current_time;
+	}
+	overlay_image(data->view,
+		data->cigar->smoke->frames[data->cigar->smoke->current], WIN_WIDTH
+		- (WIN_WIDTH / 2.7) - 20, WIN_HEIGHT - (WIN_HEIGHT / 1.9));
+}
+
+int	init_smoke(t_data *data, t_cigar *cigar)
 {
 	t_smoke	*smoke;
 
@@ -52,6 +71,6 @@ int	init_smoke(t_data *data)
 	if (!smoke->frames || !load_smoke_texts(data, smoke))
 		return (0);
 	smoke->frame_delay = 500;
-	data->cigar->smoke = smoke;
+	cigar->smoke = smoke;
 	return (1);
 }

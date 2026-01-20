@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:27:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 19:56:53 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/19 21:25:00 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	free_cigar(t_cigar *cigar, void *mlx)
 	if (cigar->cigar)
 		free_img(cigar->cigar, mlx);
 	if (cigar->smoke)
-		free_img(cigar->smoke, mlx);
+		free_smoke(cigar->smoke, mlx);
 	if (cigar)
 		free(cigar);
 }

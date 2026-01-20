@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 22:05:36 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 21:23:22 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/20 01:31:37 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/stat.h>
+# include <sys/time.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
@@ -71,9 +72,11 @@ void	move_player(t_data *data, double move_x, double move_y);
 // overlay/overlay_cigar.c
 t_cigar	*init_cigar(t_data *data);
 int		get_pixel_color(t_img *img, int x, int y);
+void	overlay_image(t_img *dest, t_img *src, int x_off, int y_off);
 int		load_cigar(t_data *data);
 
 // overlay/overlay_cigar.c
-int	init_smoke(t_data *data);
+void	loop_smoke(t_data *data);
+int		init_smoke(t_data *data, t_cigar *cigar);
 
 #endif
