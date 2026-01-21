@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 00:23:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/21 17:08:05 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/21 18:12:49 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	get_color(char **lines, char *sig)
 	x = 0;
 	while (lines[x] && ft_strnstr(lines[x], sig, ft_strlen(lines[x])) == NULL)
 		x++;
+	if (!lines[x])
+		return (0);
 	line = ft_strnstr(lines[x], sig, ft_strlen(lines[x]));
 	if (!line)
 		return (0);
@@ -42,13 +44,12 @@ int	get_color(char **lines, char *sig)
 	{
 		line2 = ft_strtrim(line + ft_strlen(sig), " \n");
 		rgb_char = ft_split((const char *)line2, ',');
-		free(line2);
 	}
 	if (!rgb_char || !valid_colors(rgb_char))
-		return (0);
+		return (free(line2), 0);
 	rgb = create_rgb(ft_atoi(rgb_char[0]), ft_atoi(rgb_char[1]),
 			ft_atoi(rgb_char[2]));
-	return (ft_free_split(rgb_char), rgb);
+	return (free(line2), ft_free_split(rgb_char), rgb);
 }
 
 char	*get_single_text_path(char **lines, char *sig)
@@ -61,6 +62,8 @@ char	*get_single_text_path(char **lines, char *sig)
 	x = 0;
 	while (lines[x] && ft_strnstr(lines[x], sig, ft_strlen(lines[x])) == NULL)
 		x++;
+	if (!lines[x])
+		return (NULL);
 	line = ft_strnstr(lines[x], sig, ft_strlen(lines[x]));
 	if (!line)
 		return (NULL);
