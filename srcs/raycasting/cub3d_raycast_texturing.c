@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 17:28:15 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/20 18:25:49 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:14:19 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
  */
 t_img	*c3_rycst_assign_text(t_data *data)
 {
+	if (data->raycast->map_tile == DOOR)
+		return (data->map->tex_door);
 	if (data->raycast->hit_vertical && cos(data->raycast->ray_angle) > 0)
 		return (data->map->tex_east);
 	else if (data->raycast->hit_vertical && cos(data->raycast->ray_angle) < 0)

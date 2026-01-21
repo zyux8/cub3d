@@ -1,7 +1,7 @@
-NO ./maps/textures/wall_1.xpm
-SO ./maps/textures/wall_1.xpm
-WE ./maps/textures/wall_1.xpm
-EA ./maps/textures/wall_1.xpm
+NO ./maps/textures/north.xpm
+SO ./maps/textures/south.xpm
+WE ./maps/textures/west.xpm
+EA ./maps/textures/east.xpm
 C 20,61,200
 F 0,200,20
 DO ./maps/textures/wall_1.xpm

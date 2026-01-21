@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:06:01 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 19:51:32 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:50:04 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,21 @@ typedef struct s_keys
 typedef struct s_raycast
 {
 	float					ray_angle;
-	float					dist;
-	int						hit_vertical;
-	int						ray_pos_x;
-	int						ray_pos_y;
-	int						step_x;
-	int						step_y;
-	float					initial_x;
-	float					initial_y;
 	float					ray_dir_x;
 	float					ray_dir_y;
+	float					initial_x;
+	float					initial_y;
 	float					delta_dist_x;
 	float					delta_dist_y;
 	float					dist_x;
 	float					dist_y;
+	float					dist;
+	int						step_x;
+	int						step_y;
+	int						ray_pos_x;
+	int						ray_pos_y;
+	int						hit_vertical;
+	int						map_tile;
 }							t_raycast;
 
 
@@ -133,9 +134,6 @@ typedef struct s_smoke
 	int						current;
 	long					last_update;
 	long					frame_delay;
-	// int		x;
-	// int		y;
-	// int		enabled;
 }							t_smoke;
 
 typedef struct s_cigar

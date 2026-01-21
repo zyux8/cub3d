@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 23:51:41 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 21:25:38 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:21:41 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,23 @@ void	draw_fov(t_data *data)
 	float	ray_x;
 	float	ray_y;
 	float	step;
-	float	dist;
 
 	angle = data->player->facing - (data->map->actual_fov / 2);
 	while (angle <= data->player->facing + (data->map->actual_fov / 2))
 	{
 		ray_x = data->player->x_pos;
 		ray_y = data->player->y_pos;
-		step = 0.0f;
-		dist = 0.0f;
+		step = -0.02f;
 		while (step < 20.0f)
 		{
 			ray_x = data->player->x_pos + cos(angle) * step;
 			ray_y = data->player->y_pos + sin(angle) * step;
-			if (ray_x < 0 || ray_x >= data->map->map_width || ray_y < 0
-				|| ray_y >= data->map->map_height
-				|| data->map->map[(int)ray_y][(int)ray_x] == 1)
+			if (data->map->map[(int)ray_y][(int)ray_x] == WALL
+				|| data->map->map[(int)ray_y][(int)ray_x] == DOOR)
 				break ;
-			my_pixel_put(data->minimap->img, 100 + (int)((ray_x
-						- data->player->x_pos) * TILE_SIZE), 100 + (int)((ray_y
-						- data->player->y_pos) * TILE_SIZE), create_rgb(80, 80,
-						80));
+			my_pixel_put(data->minimap->img, 100 + (int)
+				((ray_x - data->player->x_pos) * TILE_SIZE), 100 + (int)
+				((ray_y - data->player->y_pos) * TILE_SIZE), 5263440);
 			step += 0.02f;
 		}
 		angle += 0.01f;

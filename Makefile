@@ -6,7 +6,7 @@
 #    By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/20 17:52:21 by pbarthol         ###   ########.fr        #
+#    Updated: 2026/01/21 16:38:39 by pbarthol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,10 @@ SRC = $(addprefix srcs/, \
 	validate_map.c \
 	) \
 	$(addprefix raycasting/, \
+	cub3d_raycast_draw.c \
 	cub3d_raycast_main.c \
 	cub3d_raycast_texturing.c \
+	cub3d_raycast_utils.c \
 	) \
 	$(addprefix overlay/, \
 	overlay_cigar.c \

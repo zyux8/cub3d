@@ -6,7 +6,7 @@
 /*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 21:11:00 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:48:09 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	map_valid(t_data *data)
 int	check_map(int ac, char **av, t_data *data)
 {
 	char	**lines;
-	int		x;
 	int		fd;
 
 	if (ac < 2 || !ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
@@ -95,12 +94,9 @@ int	check_map(int ac, char **av, t_data *data)
 	if (!lines)
 		return (0);
 	if (!extract_textures(data, lines) || !extract_colors(data, lines))
-		return (0);
+		return (free_lines(lines), 0);
 	extract_map(data, lines);
-	x = 0;
-	while (lines[x])
-		free(lines[x++]);
-	free(lines);
+	free_lines(lines);
 	if (!map_valid(data))
 		return (0);
 	get_player_pos(data);

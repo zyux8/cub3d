@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:27:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 21:25:00 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/21 17:38:25 by pbarthol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,34 @@ void	free_map(t_map *map, void *mlx)
 	free(map);
 }
 
-void	free_smoke(t_smoke *smoke, void *mlx)
+void	free_cigar(t_cigar *cigar, void *mlx)
 {
 	int	x;
 
 	x = 0;
-	while (x < smoke->frame_count)
-		if (smoke->frames[x])
-			free_img(smoke->frames[x++], mlx);
-	if (smoke)
-		free(smoke);
-}
-
-void	free_cigar(t_cigar *cigar, void *mlx)
-{
 	if (cigar->cigar)
 		free_img(cigar->cigar, mlx);
 	if (cigar->smoke)
-		free_smoke(cigar->smoke, mlx);
-	if (cigar)
-		free(cigar);
+	{
+		while (x < cigar->smoke->frame_count)
+			if (cigar->smoke->frames[x])
+				free_img(cigar->smoke->frames[x++], mlx);
+		free(cigar->smoke->frames);
+	}
+	if (cigar->smoke)
+		free(cigar->smoke);
+	free(cigar);
+}
+
+void	free_mlx(t_data *data)
+{
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx)
+	{
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
 }
 
 void	cleanup_and_exit(t_data *data)
@@ -89,12 +97,10 @@ void	cleanup_and_exit(t_data *data)
 		free_player(data->player);
 	if (data->keys)
 		free_keys(data->keys);
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-	}
+	if (data->raycast)
+		free(data->raycast);
+	if (data->fps_count)
+		free(data->fps_count);
+	free_mlx(data);
 	exit(0);
 }
