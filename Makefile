@@ -3,16 +3,42 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+         #
+#    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/21 16:38:39 by pbarthol         ###   ########.fr        #
+#    Updated: 2026/01/22 21:20:38 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
-CFLAGS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Iminilibx-linux -g
+NAME_BONUS = cub3d_bonus
+CFLAGS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Iminilibx-linux -Isrcs -g
+CFLAGS_BONUS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Iminilibx-linux -Isrcs_bonus -g
 SRC = $(addprefix srcs/, \
+	$(addprefix frees/, \
+	free.c \
+	free_helpers.c) \
+	$(addprefix handle_input/, \
+	check_map_utils.c \
+	check_map_utils2.c \
+	check_map.c \
+	extract_map.c \
+	extract_texts_utils.c \
+	extract_texts.c \
+	validate_map.c \
+	) \
+	$(addprefix raycasting/, \
+	cub3d_raycast_draw.c \
+	cub3d_raycast_main.c \
+	cub3d_raycast_texturing.c \
+	cub3d_raycast_utils.c \
+	) \
+	input_handler.c \
+	main.c \
+	utils.c \
+	utils_02.c)
+
+SRC_BONUS = $(addprefix srcs/, \
 	draw_minimap/draw_minimap.c \
 	draw_minimap/draw_minimap_utils.c \
 	$(addprefix frees/, \
@@ -43,6 +69,7 @@ SRC = $(addprefix srcs/, \
 	utils_02.c)
 
 OBJ = $(SRC:.c=.o)
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
 LIBFT_DIR = includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = includes/minilibx-linux
@@ -57,6 +84,8 @@ ORANGE		= \033[33;01m
 
 all:	$(NAME)
 
+bonus:	$(NAME_BONUS)
+
 $(LIBFT):
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 
@@ -67,20 +96,27 @@ $(NAME): $(OBJ) $(LIBFT)
 	cc $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) $(OBJ) $(LIBFT) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -o $(NAME)
 	echo "$(GREEN)		- $(NAME) Compiled -$(NONE)"
 
+$(NAME_BONUS): $(OBJ_BONUS) $(LIBFT)
+	echo "$(ORANGE)		- Compiling $(NAME_BONUS)...$(NONE)"
+	make -C $(LIBFT_DIR) --silent
+	make -C $(MLX_DIR) --silent
+	cc $(CFLAGS_BONUS) -I$(LIBFT_DIR) -I$(MLX_DIR) $(OBJ_BONUS) $(LIBFT) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -o $(NAME_BONUS)
+	echo "$(GREEN)		- $(NAME_BONUS) Compiled -$(NONE)"
+
 %.o: %.c
 	cc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) $(OBJ_BONUS)
 	@$(MAKE) clean --no-print-directory -C $(MLX_DIR)
 	@$(MAKE) clean --no-print-directory -C $(LIBFT_DIR)
 	echo "$(ORANGE)		- Deleted object files$(NONE)"
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BONUS)
 	@$(MAKE) clean --no-print-directory -C $(MLX_DIR)
 	@$(MAKE) fclean --no-print-directory -C $(LIBFT_DIR)
-	echo "$(ORANGE)		- Deleted $(NAME)$(NONE)"
+	echo "$(ORANGE)		- Deleted $(NAME) and $(NAME_BONUS)$(NONE)"
 
 re: fclean all
 
@@ -99,4 +135,4 @@ gitpush:
 		echo "$(GREEN)		- Pushed to branch '$$current_branch'$(NONE)"; \
 	fi
 
-.PHONY: all clean fclean re mygit format
+.PHONY: all bonus clean fclean re mygit format
