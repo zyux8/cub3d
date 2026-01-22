@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:34:48 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/22 22:16:58 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/22 22:34:06 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	move_player(t_data *data, double move_x, double move_y)
 	if ((int)(data->player->x_pos + move_x) > 0 && (int)(data->player->x_pos
 			+ move_x) < data->map->map_width)
 		data->player->x_pos += move_x;
-	if ((int)(data->player->y_pos + move_y) > 0 && (int)(data->player->y_pos + move_y) < data->map->map_height)
+	if ((int)(data->player->y_pos + move_y) > 0 && (int)(data->player->y_pos
+			+ move_y) < data->map->map_height)
 		data->player->y_pos += move_y;
 }

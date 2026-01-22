@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:42:20 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/22 22:12:53 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/22 22:35:04 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,16 @@ void	c3_rycst_main_loop(t_data *data, int i)
 	while (1)
 	{
 		c3_rycst_grid_step(data, i);
-		if (data->raycast->ray_pos_y < 0 || data->raycast->ray_pos_y >= data->map->map_height ||
-			data->raycast->ray_pos_x < 0 || data->raycast->ray_pos_x >= data->map->map_width)
+		if (data->raycast->ray_pos_y < 0
+			|| data->raycast->ray_pos_y >= data->map->map_height
+			|| data->raycast->ray_pos_x < 0
+			|| data->raycast->ray_pos_x >= data->map->map_width)
 		{
 			c3_rycst_draw_line(data, i);
 			break ;
 		}
-		data->raycast->map_tile = data->map->map[data->raycast->ray_pos_y]
-		[data->raycast->ray_pos_x];
+		data->raycast->map_tile = data->map
+			->map[data->raycast->ray_pos_y][data->raycast->ray_pos_x];
 		if (data->raycast->map_tile == WALL)
 		{
 			c3_rycst_draw_line(data, i);
@@ -86,7 +88,7 @@ void	c3_rycst_main_loop(t_data *data, int i)
  */
 void	c3_rycst_main(t_data *data)
 {
-	int		i;
+	int	i;
 
 	i = -1;
 	if (data->view && data->view->addr)
