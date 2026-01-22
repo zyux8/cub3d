@@ -6,15 +6,15 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/22 21:20:38 by ohaker           ###   ########.fr        #
+#    Updated: 2026/01/22 21:53:10 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 NAME_BONUS = cub3d_bonus
-CFLAGS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Iminilibx-linux -Isrcs -g
-CFLAGS_BONUS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Iminilibx-linux -Isrcs_bonus -g
-SRC = $(addprefix srcs/, \
+CFLAGS = -Wall -Wextra -Werror -Imandatory/includes -I/usr/include -Imandatory/includes/minilibx-linux -Imandatory/srcs -g
+CFLAGS_BONUS = -Wall -Wextra -Werror -Ibonus/includes -I/usr/include -Ibonus/includes/minilibx-linux -Ibonus/srcs_bonus -g
+SRC = $(addprefix mandatory/srcs/, \
 	$(addprefix frees/, \
 	free.c \
 	free_helpers.c) \
@@ -38,9 +38,11 @@ SRC = $(addprefix srcs/, \
 	utils.c \
 	utils_02.c)
 
-SRC_BONUS = $(addprefix srcs/, \
-	draw_minimap/draw_minimap.c \
-	draw_minimap/draw_minimap_utils.c \
+SRC_BONUS = $(addprefix bonus/srcs_bonus/, \
+	$(addprefix draw_minimap/, \
+	draw_minimap.c \
+	draw_minimap_utils.c \
+	) \
 	$(addprefix frees/, \
 	free.c \
 	free_helpers.c) \
@@ -70,9 +72,9 @@ SRC_BONUS = $(addprefix srcs/, \
 
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
-LIBFT_DIR = includes/libft
+LIBFT_DIR = mandatory/includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
-MLX_DIR = includes/minilibx-linux
+MLX_DIR = mandatory/includes/minilibx-linux
 
 # Color definitions for terminal output
 NONE		= \033[0m
