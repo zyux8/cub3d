@@ -6,11 +6,11 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 00:44:35 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/20 18:32:45 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/26 14:20:00 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 t_fps_count	*init_fps_count(void)
 {

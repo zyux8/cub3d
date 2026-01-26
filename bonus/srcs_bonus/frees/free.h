@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:10:38 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 19:53:37 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/26 14:40:39 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	free_lines(char **lines);
 
 // srcs/frees.free1.c
 void	cleanup_and_exit(t_data *data);
+void	free_map(t_map *map, void *mlx);
 
 #endif

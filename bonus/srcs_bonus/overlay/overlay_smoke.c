@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   overlay_smoke.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 18:33:07 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/21 17:51:27 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:20:00 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	load_smoke_texts(t_data *data, t_smoke *smoke)
 {

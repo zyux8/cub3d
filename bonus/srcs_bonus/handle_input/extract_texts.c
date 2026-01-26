@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   extract_texts.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 17:09:56 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 21:11:07 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:29:17 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	extract_floor(t_data *data, char **lines)
 {
 	int		fc;
-	char	*p_f;
 
 	if (!is_texture(lines, "F "))
 	{
@@ -24,19 +23,6 @@ int	extract_floor(t_data *data, char **lines)
 			return (printf("extract_colors: one or more colors not found\n"),
 				0);
 		data->map->floor_color = fc;
-		data->map->tex_floor = NULL;
-	}
-	else if (is_texture(lines, "F "))
-	{
-		p_f = get_single_text_path(lines, "F");
-		if (!p_f)
-			return (printf("extract_colors: one or more colors not found\n"),
-				0);
-		data->map->tex_floor = get_texture(data, p_f);
-		if (!data->map->tex_floor)
-			return (free(p_f),
-				printf("extract_colors: failed to load floor texture\n"), 0);
-		free(p_f);
 	}
 	return (1);
 }
@@ -44,7 +30,6 @@ int	extract_floor(t_data *data, char **lines)
 int	extract_ceiling(t_data *data, char **lines)
 {
 	int		cc;
-	char	*p_c;
 
 	if (!is_texture(lines, "C "))
 	{
@@ -53,19 +38,6 @@ int	extract_ceiling(t_data *data, char **lines)
 			return (printf("extract_colors: one or more colors not found\n"),
 				0);
 		data->map->ceiling_color = cc;
-		data->map->tex_ceiling = NULL;
-	}
-	else if (is_texture(lines, "C "))
-	{
-		p_c = get_single_text_path(lines, "C");
-		if (!p_c)
-			return (printf("extract_colors: one or more colors not found\n"),
-				0);
-		data->map->tex_ceiling = get_texture(data, p_c);
-		if (!data->map->tex_ceiling)
-			return (free(p_c),
-				printf("extract_colors: failed to load floor texture\n"), 0);
-		free(p_c);
 	}
 	return (1);
 }

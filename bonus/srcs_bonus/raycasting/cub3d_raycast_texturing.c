@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_raycast_texturing.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 17:28:15 by pbarthol          #+#    #+#             */
-/*   Updated: 2026/01/21 16:14:19 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:20:00 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 /**
  * Selects the wall texture hit by the current ray based on impact side and

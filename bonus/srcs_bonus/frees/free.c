@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:27:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/21 17:38:25 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:32:34 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	free_map_texts(t_map *map, void *mlx)
 {
@@ -22,10 +22,6 @@ void	free_map_texts(t_map *map, void *mlx)
 		free_img(map->tex_west, mlx);
 	if (map->tex_east)
 		free_img(map->tex_east, mlx);
-	if (map->tex_floor)
-		free_img(map->tex_floor, mlx);
-	if (map->tex_ceiling)
-		free_img(map->tex_ceiling, mlx);
 	if (map->tex_door)
 		free_img(map->tex_door, mlx);
 }

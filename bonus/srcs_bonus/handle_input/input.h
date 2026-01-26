@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 21:57:19 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/21 17:48:48 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:32:14 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ t_playerpos	*init_player(int x, int y, int dir);
 void		free_paths(char *p_no, char *p_so, char *p_we, char *p_ea);
 
 // extract_map done
-void		assign_pos(int *c, char sig);
+int			assign_pos(int *c, char sig);
 int			get_player_pos(t_data *data);
 int			is_map_char(char c);
-void		copy_col(char *line, int *row, int width);
+int			copy_col(char *line, int *row, int width);
 int			extract_map(t_data *data, char **lines);
 
 // check_map_utils

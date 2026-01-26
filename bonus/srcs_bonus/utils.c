@@ -6,11 +6,11 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:34:48 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/20 18:32:42 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/26 14:20:00 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	my_pixel_put(t_img *img, int x, int y, int color)
 {

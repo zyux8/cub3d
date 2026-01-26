@@ -6,32 +6,32 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 00:18:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/19 00:20:03 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/26 14:42:13 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
-void	assign_pos(int *c, char sig)
+int	assign_pos(int *c, char sig)
 {
 	if (sig == ' ')
-		*c = NONE;
+		return (*c = NONE, 1);
 	else if (sig == '0')
-		*c = GROUND;
+		return (*c = GROUND, 1);
 	else if (sig == '1')
-		*c = WALL;
+		return (*c = WALL, 1);
 	else if (sig == 'N')
-		*c = PLAYER_N;
+		return (*c = PLAYER_N, 1);
 	else if (sig == 'S')
-		*c = PLAYER_S;
+		return (*c = PLAYER_S, 1);
 	else if (sig == 'E')
-		*c = PLAYER_E;
+		return (*c = PLAYER_E, 1);
 	else if (sig == 'W')
-		*c = PLAYER_W;
+		return (*c = PLAYER_W, 1);
 	else if (sig == 'D')
-		*c = DOOR;
-	else if (sig == 'P')
-		*c = SPRITE;
+		return (*c = DOOR, 1);
+	else
+		return (printf("Wrong character in map spotted\n"), 0);
 }
 
 int	get_player_pos(t_data *data)
@@ -61,19 +61,21 @@ int	is_map_char(char c)
 		|| c == 'W' || c == 'D');
 }
 
-void	copy_col(char *line, int *row, int width)
+int	copy_col(char *line, int *row, int width)
 {
 	int	x;
 
 	x = 0;
 	while (line[x] && line[x] != '\n')
 	{
-		assign_pos(&row[x], line[x]);
+		if (!assign_pos(&row[x], line[x]))
+			return (0);
 		x++;
 	}
 	while (x < width)
 		row[x++] = NONE;
 	row[x] = '\0';
+	return (1);
 }
 
 int	extract_map(t_data *data, char **lines)
@@ -89,7 +91,8 @@ int	extract_map(t_data *data, char **lines)
 	malloc_map(&map, data->map->map_height, data->map->map_width);
 	while (x < data->map->map_height)
 	{
-		copy_col(lines[start + x], map[x], data->map->map_width);
+		if (!copy_col(lines[start + x], map[x], data->map->map_width))
+			return (data->map->map = map, 0);
 		x++;
 	}
 	data->map->map = map;

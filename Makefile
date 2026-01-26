@@ -6,14 +6,14 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/30 21:50:19 by ohaker            #+#    #+#              #
-#    Updated: 2026/01/23 23:30:16 by ohaker           ###   ########.fr        #
+#    Updated: 2026/01/26 14:23:55 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 NAME_BONUS = cub3d_bonus
-CFLAGS = -Wall -Wextra -Werror -Imandatory/includes -I/usr/include -Imandatory/includes/minilibx-linux -Imandatory/srcs -g
-CFLAGS_BONUS = -Wall -Wextra -Werror -Ibonus/includes -I/usr/include -Ibonus/includes/minilibx-linux -Ibonus/srcs_bonus -g
+CFLAGS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Imandatory -g
+CFLAGS_BONUS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Ibonus -g
 SRC = $(addprefix mandatory/srcs/, \
 	$(addprefix frees/, \
 	free.c \
@@ -72,9 +72,9 @@ SRC_BONUS = $(addprefix bonus/srcs_bonus/, \
 
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
-LIBFT_DIR = mandatory/includes/libft
+LIBFT_DIR = includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
-MLX_DIR = mandatory/includes/minilibx-linux
+MLX_DIR = includes/minilibx-linux
 
 # Color definitions for terminal output
 NONE		= \033[0m
@@ -105,8 +105,11 @@ $(NAME_BONUS): $(OBJ_BONUS) $(LIBFT)
 	cc $(CFLAGS_BONUS) -I$(LIBFT_DIR) -I$(MLX_DIR) $(OBJ_BONUS) $(LIBFT) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -o $(NAME_BONUS)
 	echo "$(GREEN)		- $(NAME_BONUS) Compiled -$(NONE)"
 
-%.o: %.c
+mandatory/srcs/%.o: mandatory/srcs/%.c
 	cc $(CFLAGS) -c $< -o $@
+
+bonus/srcs_bonus/%.o: bonus/srcs_bonus/%.c
+	cc $(CFLAGS_BONUS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ) $(OBJ_BONUS)

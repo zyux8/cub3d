@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:10:49 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/21 17:48:09 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:36:23 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	init_map(t_data *data)
 {
@@ -25,8 +25,6 @@ void	init_map(t_data *data)
 	map->tex_west = NULL;
 	map->tex_east = NULL;
 	map->tex_door = NULL;
-	map->tex_ceiling = NULL;
-	map->tex_floor = NULL;
 	map->map = NULL;
 	map->map_height = 0;
 	map->map_width = 0;
@@ -95,10 +93,8 @@ int	check_map(int ac, char **av, t_data *data)
 		return (0);
 	if (!extract_textures(data, lines) || !extract_colors(data, lines))
 		return (free_lines(lines), 0);
-	extract_map(data, lines);
-	free_lines(lines);
-	if (!map_valid(data))
-		return (0);
+	if (!extract_map(data, lines) || !map_valid(data))
+		return (free_lines(lines), 0);
 	get_player_pos(data);
-	return (1);
+	return (free_lines(lines), 1);
 }

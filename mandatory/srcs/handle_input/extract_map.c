@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 00:18:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/22 22:09:43 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/26 15:22:50 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	extract_map(t_data *data, char **lines)
 	while (x < data->map->map_height)
 	{
 		if (!copy_col(lines[start + x], map[x], data->map->map_width))
-			return (0);
+			return (data->map->map = map, 0);
 		x++;
 	}
 	data->map->map = map;

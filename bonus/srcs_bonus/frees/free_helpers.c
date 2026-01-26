@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbarthol <pbarthol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:30:00 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/21 17:37:15 by pbarthol         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:20:01 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	free_img(t_img *img, void *mlx)
 {

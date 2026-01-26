@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 22:08:15 by ohaker            #+#    #+#             */
-/*   Updated: 2026/01/22 21:23:45 by ohaker           ###   ########.fr       */
+/*   Updated: 2026/01/26 14:18:02 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 # define TILE_SIZE 28
 # define MINIMAP_W 200
-# define MINIMAP_H 200
 # define MINIMAP_H 200
 
 // srcs/draw_minimap/draw_minimap.c
